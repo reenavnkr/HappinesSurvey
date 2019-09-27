@@ -42,13 +42,14 @@ namespace HappinesSurvey.Controllers
 
                 UserDisplayViewModel model = new UserDisplayViewModel();
                 model = _ud.isdetail(id);
+
                 if (Session["isuserId"] != null)
                 {
                     int Roleid = (int)Session["RoleID"];
                     if (Roleid == 1)
                     {
-                       // return RedirectToAction("","")
-                        return View("AdminDashboard");
+                        // return RedirectToAction("","")
+                        return View("AdminDashboard",model);
                     }
                     else if (Roleid == 2)
                     {
@@ -82,11 +83,21 @@ namespace HappinesSurvey.Controllers
           
         }
 
+        //public ActionResult getDestail(UserDisplayViewModel userD)
+        //{
+        
+        //        return RedirectToAction("Dashboard");
+        //    }
+        //    return RedirectToAction("Login");
+        //}
+
         public ActionResult Logout()
         {
             Session.Clear();
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Home");
         }
+
+      
     }
 }
