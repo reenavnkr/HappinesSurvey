@@ -5,6 +5,14 @@ VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappinesSurvey", "HappinesSurvey\HappinesSurvey.csproj", "{4CBE32DD-2B69-499B-BB68-A581DC80D6B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappinessSurvey.BAL", "HappinessSurvey.BAL\HappinessSurvey.BAL.csproj", "{29F4E8D1-F7B4-447D-9532-8E4EE78C8B05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappinessSurvey.DAL", "HappinessSurvey.DAL\HappinessSurvey.DAL.csproj", "{C53FFCED-B477-42C8-AB1A-083CED2826C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappinessSurvey.API", "HappinessSurvey.API\HappinessSurvey.API.csproj", "{9E0C9355-7377-49C7-8A44-E445A4421542}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappinessSurvey.Model", "HappinessSurvey.Model\HappinessSurvey.Model.csproj", "{401549EB-B5FC-4BBE-92AE-02781BABE089}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +23,22 @@ Global
 		{4CBE32DD-2B69-499B-BB68-A581DC80D6B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CBE32DD-2B69-499B-BB68-A581DC80D6B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CBE32DD-2B69-499B-BB68-A581DC80D6B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29F4E8D1-F7B4-447D-9532-8E4EE78C8B05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29F4E8D1-F7B4-447D-9532-8E4EE78C8B05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29F4E8D1-F7B4-447D-9532-8E4EE78C8B05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29F4E8D1-F7B4-447D-9532-8E4EE78C8B05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C53FFCED-B477-42C8-AB1A-083CED2826C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C53FFCED-B477-42C8-AB1A-083CED2826C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C53FFCED-B477-42C8-AB1A-083CED2826C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C53FFCED-B477-42C8-AB1A-083CED2826C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E0C9355-7377-49C7-8A44-E445A4421542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E0C9355-7377-49C7-8A44-E445A4421542}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E0C9355-7377-49C7-8A44-E445A4421542}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E0C9355-7377-49C7-8A44-E445A4421542}.Release|Any CPU.Build.0 = Release|Any CPU
+		{401549EB-B5FC-4BBE-92AE-02781BABE089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{401549EB-B5FC-4BBE-92AE-02781BABE089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{401549EB-B5FC-4BBE-92AE-02781BABE089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{401549EB-B5FC-4BBE-92AE-02781BABE089}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
