@@ -17,6 +17,15 @@ namespace HappinesSurvey.Controllers
         // GET: Home
         public ActionResult Login()
         {
+
+            if (Session["RoleID"] != null)
+            { 
+                int id = Convert.ToInt32(Session["RoleID"]);
+                if (id == 0)
+                {
+                    ViewBag.NoRole = "Role is not defined - contact to admin";
+                }
+            }
             return View("Login");
         }
         // Post: Home
@@ -47,29 +56,30 @@ namespace HappinesSurvey.Controllers
                 {
                     int Roleid = (int)Session["RoleID"];
                     if (Roleid == 1)
-                    {
+                    { //admin
                         // return RedirectToAction("","")
                         return View("AdminDashboard",model);
                     }
                     else if (Roleid == 2)
-                    {
+                    {//Senior manager
 
                     }
                     else if (Roleid == 3)
-                    {
+                    { //manager
 
                     }
                     else if (Roleid == 4)
-                    {
+                    { //team leader
 
                     }
                     else if (Roleid == 5)
-                    {
+                    { //team mamber
 
                     }
                     else if (Roleid == 0)
-                    {
-                        //not found
+                    {                      
+                        //user.."name" role not define
+                        return RedirectToAction("Login"); 
                     }
                     else if (Roleid == 6)
                     {
@@ -83,13 +93,6 @@ namespace HappinesSurvey.Controllers
           
         }
 
-        //public ActionResult getDestail(UserDisplayViewModel userD)
-        //{
-        
-        //        return RedirectToAction("Dashboard");
-        //    }
-        //    return RedirectToAction("Login");
-        //}
 
         public ActionResult Logout()
         {

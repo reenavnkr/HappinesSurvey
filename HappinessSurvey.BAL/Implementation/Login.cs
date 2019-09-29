@@ -62,7 +62,7 @@ namespace HappinessSurvey.BAL.Implementation
                 }
                 else if (role == 0)
                 {
-                     roleid = 0;
+                     roleid = role;
                     //if not assign any role
                 }
                 else if (role == 2)
