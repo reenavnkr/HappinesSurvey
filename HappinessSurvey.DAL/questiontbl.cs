@@ -22,11 +22,7 @@ namespace HappinessSurvey.DAL
     
         public int q_id { get; set; }
         public string question { get; set; }
-        public int role_id { get; set; }
-        public int pro_id { get; set; }
     
-        public virtual projecttbl projecttbl { get; set; }
-        public virtual roletbl roletbl { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<surveytbl> surveytbls { get; set; }
     }

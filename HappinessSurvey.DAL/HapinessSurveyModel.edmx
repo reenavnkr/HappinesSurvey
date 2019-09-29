@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HapinessSurveyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HapinessSurveyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="departmenttbl">
           <Key>
             <PropertyRef Name="dep_id" />
@@ -26,8 +26,6 @@
           </Key>
           <Property Name="q_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="question" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="role_id" Type="int" Nullable="false" />
-          <Property Name="pro_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="roletbl">
           <Key>
@@ -43,7 +41,7 @@
           <Property Name="sur_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="q_id" Type="int" Nullable="false" />
           <Property Name="rating" Type="int" Nullable="false" />
-          <Property Name="comments" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="comments" Type="nvarchar(max)" />
           <Property Name="Start_date" Type="date" Nullable="false" />
           <Property Name="End_date" Type="date" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
@@ -68,30 +66,6 @@
           <Property Name="user_Pass" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Dep_id" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_questiontbl_projecttbl">
-          <End Role="projecttbl" Type="Self.projecttbl" Multiplicity="1" />
-          <End Role="questiontbl" Type="Self.questiontbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="projecttbl">
-              <PropertyRef Name="pro_id" />
-            </Principal>
-            <Dependent Role="questiontbl">
-              <PropertyRef Name="pro_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_questiontbl_roletbl">
-          <End Role="roletbl" Type="Self.roletbl" Multiplicity="1" />
-          <End Role="questiontbl" Type="Self.questiontbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="roletbl">
-              <PropertyRef Name="role_id" />
-            </Principal>
-            <Dependent Role="questiontbl">
-              <PropertyRef Name="role_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_surveytbl_departmenttbl">
           <End Role="departmenttbl" Type="Self.departmenttbl" Multiplicity="1" />
           <End Role="surveytbl" Type="Self.surveytbl" Multiplicity="*" />
@@ -184,14 +158,6 @@
           <EntitySet Name="surveytbl" EntityType="Self.surveytbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="teamtbl" EntityType="Self.teamtbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTbl" EntityType="Self.UserTbl" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_questiontbl_projecttbl" Association="Self.FK_questiontbl_projecttbl">
-            <End Role="projecttbl" EntitySet="projecttbl" />
-            <End Role="questiontbl" EntitySet="questiontbl" />
-          </AssociationSet>
-          <AssociationSet Name="FK_questiontbl_roletbl" Association="Self.FK_questiontbl_roletbl">
-            <End Role="roletbl" EntitySet="roletbl" />
-            <End Role="questiontbl" EntitySet="questiontbl" />
-          </AssociationSet>
           <AssociationSet Name="FK_surveytbl_departmenttbl" Association="Self.FK_surveytbl_departmenttbl">
             <End Role="departmenttbl" EntitySet="departmenttbl" />
             <End Role="surveytbl" EntitySet="surveytbl" />
@@ -221,8 +187,7 @@
             <End Role="UserTbl" EntitySet="UserTbl" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HapinessSurveyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -242,7 +207,6 @@
           <Property Name="pro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="pro_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pro_status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="questiontbls" Relationship="Self.FK_questiontbl_projecttbl" FromRole="projecttbl" ToRole="questiontbl" />
           <NavigationProperty Name="teamtbls" Relationship="Self.FK_teamtbl_projecttbl" FromRole="projecttbl" ToRole="teamtbl" />
         </EntityType>
         <EntityType Name="questiontbl">
@@ -251,10 +215,6 @@
           </Key>
           <Property Name="q_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="role_id" Type="Int32" Nullable="false" />
-          <Property Name="pro_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="projecttbl" Relationship="Self.FK_questiontbl_projecttbl" FromRole="questiontbl" ToRole="projecttbl" />
-          <NavigationProperty Name="roletbl" Relationship="Self.FK_questiontbl_roletbl" FromRole="questiontbl" ToRole="roletbl" />
           <NavigationProperty Name="surveytbls" Relationship="Self.FK_surveytbl_questiontbl" FromRole="questiontbl" ToRole="surveytbl" />
         </EntityType>
         <EntityType Name="roletbl">
@@ -263,7 +223,6 @@
           </Key>
           <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="questiontbls" Relationship="Self.FK_questiontbl_roletbl" FromRole="roletbl" ToRole="questiontbl" />
           <NavigationProperty Name="teamtbls" Relationship="Self.FK_teamtbl_roletbl" FromRole="roletbl" ToRole="teamtbl" />
         </EntityType>
         <EntityType Name="surveytbl">
@@ -273,7 +232,7 @@
           <Property Name="sur_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="q_id" Type="Int32" Nullable="false" />
           <Property Name="rating" Type="Int32" Nullable="false" />
-          <Property Name="comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Start_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="End_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
@@ -331,18 +290,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_questiontbl_projecttbl">
-          <End Role="projecttbl" Type="Self.projecttbl" Multiplicity="1" />
-          <End Role="questiontbl" Type="Self.questiontbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="projecttbl">
-              <PropertyRef Name="pro_id" />
-            </Principal>
-            <Dependent Role="questiontbl">
-              <PropertyRef Name="pro_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_teamtbl_projecttbl">
           <End Role="projecttbl" Type="Self.projecttbl" Multiplicity="1" />
           <End Role="teamtbl" Type="Self.teamtbl" Multiplicity="*" />
@@ -352,18 +299,6 @@
             </Principal>
             <Dependent Role="teamtbl">
               <PropertyRef Name="pro_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_questiontbl_roletbl">
-          <End Role="roletbl" Type="Self.roletbl" Multiplicity="1" />
-          <End Role="questiontbl" Type="Self.questiontbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="roletbl">
-              <PropertyRef Name="role_id" />
-            </Principal>
-            <Dependent Role="questiontbl">
-              <PropertyRef Name="role_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -431,17 +366,9 @@
             <End Role="departmenttbl" EntitySet="departmenttbls" />
             <End Role="UserTbl" EntitySet="UserTbls" />
           </AssociationSet>
-          <AssociationSet Name="FK_questiontbl_projecttbl" Association="Self.FK_questiontbl_projecttbl">
-            <End Role="projecttbl" EntitySet="projecttbls" />
-            <End Role="questiontbl" EntitySet="questiontbls" />
-          </AssociationSet>
           <AssociationSet Name="FK_teamtbl_projecttbl" Association="Self.FK_teamtbl_projecttbl">
             <End Role="projecttbl" EntitySet="projecttbls" />
             <End Role="teamtbl" EntitySet="teamtbls" />
-          </AssociationSet>
-          <AssociationSet Name="FK_questiontbl_roletbl" Association="Self.FK_questiontbl_roletbl">
-            <End Role="roletbl" EntitySet="roletbls" />
-            <End Role="questiontbl" EntitySet="questiontbls" />
           </AssociationSet>
           <AssociationSet Name="FK_surveytbl_questiontbl" Association="Self.FK_surveytbl_questiontbl">
             <End Role="questiontbl" EntitySet="questiontbls" />
@@ -488,9 +415,7 @@
               <MappingFragment StoreEntitySet="questiontbl">
                 <ScalarProperty Name="q_id" ColumnName="q_id" />
                 <ScalarProperty Name="question" ColumnName="question" />
-                <ScalarProperty Name="role_id" ColumnName="role_id" />
-                <ScalarProperty Name="pro_id" ColumnName="pro_id" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="roletbls">
