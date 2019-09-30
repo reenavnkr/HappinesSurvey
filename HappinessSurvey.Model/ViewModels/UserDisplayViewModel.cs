@@ -10,6 +10,7 @@ namespace HappinessSurvey.Model.ViewModels
     {
         public string user_name { get; set; }
         public string dep_name { get; set; }
+       // public string role_id { get; set; }
 
     }
 }

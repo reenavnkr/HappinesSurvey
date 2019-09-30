@@ -11,7 +11,7 @@ namespace HappinesSurvey.Controllers
         // GET: AdminDashboard
         public ActionResult Index()
         {
-            return View("AdminDashboard");
+            return View("~/Home/AdminDashboard");
         }
        
     }

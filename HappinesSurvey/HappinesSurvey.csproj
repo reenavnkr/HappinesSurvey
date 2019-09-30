@@ -172,6 +172,7 @@
     <Content Include="Content\dist\img\user6-128x128.jpg" />
     <Content Include="Content\dist\img\user7-128x128.jpg" />
     <Content Include="Content\dist\img\user8-128x128.jpg" />
+    <Content Include="Scripts\plugins\datatables\ajax\jquery.min.js" />
     <Content Include="Scripts\plugins\dist\js\app.js" />
     <Content Include="Scripts\plugins\dist\js\app.min.js" />
     <Content Include="Scripts\plugins\dist\js\demo.js" />
@@ -905,6 +906,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminDashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1026,6 +1028,7 @@
     <Content Include="Views\Shared\_MainView.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\AdminDashboard.cshtml" />
+    <Content Include="Views\Question\question.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

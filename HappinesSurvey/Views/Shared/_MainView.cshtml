@@ -77,28 +77,40 @@
                 <div class="user-panel">
                    
                         <p>Alexander Pierce</p>
-                        <
+                      
                 </div>
-                @** <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-                </span>
-            </div>
-        </form>
-        <!-- /.search form -->*@
+              
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
+                    @{ int rvalue = Convert.ToInt32(Session["RoleID"]);}
+                    @if (Session["RoleID"] != null)
+                    {
+                        if (rvalue == 1)
+                        {
+                            <li> 
+                                <a href="@Url.Action("Dashboard","Home")">
+                                    <i class="glyphicon glyphicon-dashboard"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                           <li> <a href="@Url.Action("Index","question")">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                                <span>Question Management</span>
+                            </a>
+                            </li>
+                            
+                        }
+                    }
                 </ul>
             </section>
             <!-- /.sidebar -->
         </aside>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-           @RenderBody()
+            <section class="content">
+                @RenderBody()
+                </section>
         </div><!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right hidden-xs">

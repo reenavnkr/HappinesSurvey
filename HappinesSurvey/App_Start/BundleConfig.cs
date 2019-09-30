@@ -32,7 +32,9 @@ namespace HappinesSurvey.App_Start
                       "~/Scripts/plugins/dist/js/app.min.js",
                      "~/Scripts/plugins/dist/js/demo.js",
                      "~/Scripts/plugins/iCheck/icheck.min.js",
-                     "~/Scripts/plugins/datatables/jquery.dataTables.min.js"));
+                     "~/Scripts/plugins/datatables/jquery.dataTables.min.js"
+                     //"~/Scripts/plugins/datatables/ajax/jquery.min.js"
+                     ));
 
             bundles.Add(new StyleBundle("~/css").Include(
                       "~/Content/dist/css/AdminLTE.min.css",

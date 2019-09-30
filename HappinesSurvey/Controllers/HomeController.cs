@@ -42,7 +42,7 @@ namespace HappinesSurvey.Controllers
             return View();
         }
 
-        public ActionResult Dashboard(UserDisplayViewModel userD)
+        public ActionResult Dashboard()
         {
             if (ModelState.IsValid)
             {
@@ -51,14 +51,14 @@ namespace HappinesSurvey.Controllers
 
                 UserDisplayViewModel model = new UserDisplayViewModel();
                 model = _ud.isdetail(id);
-
-                if (Session["isuserId"] != null)
+       
+                if(Session["isuserId"] != null)
                 {
                     int Roleid = (int)Session["RoleID"];
                     if (Roleid == 1)
                     { //admin
-                        // return RedirectToAction("","")
-                        return View("AdminDashboard",model);
+                      // return RedirectToAction("","")
+                        return View("AdminDashboard", model);
                     }
                     else if (Roleid == 2)
                     {//Senior manager
@@ -77,9 +77,9 @@ namespace HappinesSurvey.Controllers
 
                     }
                     else if (Roleid == 0)
-                    {                      
+                    {
                         //user.."name" role not define
-                        return RedirectToAction("Login"); 
+                        return RedirectToAction("Login");
                     }
                     else if (Roleid == 6)
                     {
@@ -101,6 +101,11 @@ namespace HappinesSurvey.Controllers
             return RedirectToAction("Login", "Home");
         }
 
+        public ActionResult ModelLayout(UserDisplayViewModel user)
+        {
+           
+            return View();
+        }
       
     }
 }
