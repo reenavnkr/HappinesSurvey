@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HappinessSurvey.DAL;
+using System.Data.Entity;
 using HappinessSurvey.BAL.Interface;
 using HappinessSurvey.BAL.Implementation;
 using HappinessSurvey.Model.ViewModels;
@@ -26,5 +28,17 @@ namespace HappinesSurvey.Controllers
             }
                 return View("AdminDashboard");
         }
+
+        public ActionResult getdata()
+        {
+            using(HapinessSurveyEntities entities = new HapinessSurveyEntities())
+            {
+                var listdata = from q in entities.questiontbls select q.question;
+               // List < listdata > questionList = new List<listdata>();
+                return Json(new {data= listdata },JsonRequestBehavior.AllowGet);
+            }
+               
+        }
+
     }
 }

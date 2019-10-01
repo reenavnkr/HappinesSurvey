@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Implementation\Login.cs" />
     <Compile Include="Interface\ILogin.cs" />
+    <Compile Include="Interface\Iquestion.cs" />
     <Compile Include="Interface\IUserdisplay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

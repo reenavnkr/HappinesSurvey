@@ -31,15 +31,13 @@ namespace HappinesSurvey.App_Start
                       "~/Scripts/plugins/fastclick/fastclick.min.js",
                       "~/Scripts/plugins/dist/js/app.min.js",
                      "~/Scripts/plugins/dist/js/demo.js",
-                     "~/Scripts/plugins/iCheck/icheck.min.js",
-                     "~/Scripts/plugins/datatables/jquery.dataTables.min.js"
-                     //"~/Scripts/plugins/datatables/ajax/jquery.min.js"
+                     "~/Scripts/plugins/iCheck/icheck.min.js"
+                     
                      ));
 
             bundles.Add(new StyleBundle("~/css").Include(
                       "~/Content/dist/css/AdminLTE.min.css",
-                      "~/Content/dist/css/skins/_all-skins.min.css",
-                      "~/Scripts/plugins/datatables/jquery.dataTables.min.css"
+                      "~/Content/dist/css/skins/_all-skins.min.css"                    
                       ));
 
             bundles.Add(new StyleBundle("~/Content/bootstrap/css/bootstrap").Include("~/Content/bootstrap/css/bootstrap.min.css", new CssRewriteUrlTransform()));
