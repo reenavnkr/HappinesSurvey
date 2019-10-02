@@ -1034,6 +1034,7 @@
     <Content Include="Views\Home\AdminDashboard.cshtml" />
     <Content Include="Views\Question\question.cshtml" />
     <Content Include="Views\Question\Edit.cshtml" />
+    <Content Include="Views\Question\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

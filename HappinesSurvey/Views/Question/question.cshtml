@@ -6,8 +6,10 @@
 
 
 <h2>question</h2>
+
 <div class="row">
     <div class="col-xs-12">
+        @Html.ActionLink("Create", "Create", "Question")
         <div class="box">
             <div class="box-body">
                 <table id="QuestionTable" class="table table-striped table-bordered dt-responsive nowrap">
@@ -16,6 +18,7 @@
                             <th>q_id</th>
                             <th>Question</th>
                             <th>edit</th>
+                            <th>delete</th>
                         </tr>
                     </thead>
                 </table>
@@ -32,12 +35,11 @@
 
 @section script{
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-   <script src="//cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
-
+    <script src="//cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
     <script>
 
         $(document).ready(function () {
-         
+
             $("#QuestionTable").DataTable({
 
                 "processing": true, // for show progress bar
@@ -45,13 +47,13 @@
                 "filter": false, // this is for disable filter (search box)
                 "orderMulti": false, // for disable multiple column at once
                 "pageLength": 2,
-          
+
                 "ajax": {
                     "url": "/question/getdata",
                     "type": "GET",
                     "dataType": "JSON"
                 },
-                
+
                 "columnDefs":
                     [{
                         "targets": [0],
@@ -60,14 +62,52 @@
                     }],
 
                 "columns": [
-                    { data: "q_id"},
+                    { data: "q_id" },
                     { data: "questions" },
-                     {
-                         "render": function (data, type, full, meta) { return '<a class="btn btn-info" href="/question/Edit/' + full.q_id + '">Edit</a>'; }
-                    }, 
+                    {
+                        "render": function (data, type, full, meta) { return '<a class="btn btn-info" href="/question/Edit/' + full.q_id + '">Edit</a>'; }
+                    },
+                    {
+                        data: null, render: function (data, type, row) {
+                            return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.q_id + "'); >Delete</a>";
+                        }
+                    },
                 ]
-                   });
+            });
         });
     </script>
+
+    <script>
+
+
+        function DeleteData(q_id) {
+        if (confirm("Are you sure you want to delete ...?")) {
+            Delete(q_id);
+        }
+        else {
+            return false;
+        }
+    }
+
+        function Delete(q_id) {
+            
+            var url = '@Url.Content("~/")' + "question/delete";
+           
+            $.post(url, { ID: q_id },
+                function (data) {
+                if (data == "Deleted") {
+                alert("Delete Customer !");
+                oTable = $('#QuestionTable').DataTable();                
+                oTable.draw();
+            }
+            else {
+                alert("Something Went Wrong!");
+            }
+        });
+    }
+    </script>
+
+
+
 }
 

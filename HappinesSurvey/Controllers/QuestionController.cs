@@ -100,9 +100,67 @@ namespace HappinesSurvey.Controllers
             }
            //eturn View("Edit", questionmodel);
         }
-        public ActionResult delete()
+        //[HttpGet]
+        //public ActionResult delete()
+        //{
+        //    return View("question");
+        //}
+
+        [HttpPost]
+        public JsonResult delete(int? id)
         {
-            return View();
+            try
+            {
+               
+                    using (HapinessSurveyEntities entities = new HapinessSurveyEntities())
+                    {
+                    if (id == null)
+                    {
+                        return Json(new { data = "Not Deleted" }, JsonRequestBehavior.AllowGet);
+                    }
+                        var deleteques = entities.questiontbls.Find(id);
+                        entities.questiontbls.Remove(deleteques);
+                        entities.SaveChanges();
+                        return Json(new { data = "Deleted" }, JsonRequestBehavior.AllowGet);
+                    
+                }
+               
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
+        }
+
+        public ActionResult Create()
+        {
+            var addque = new Questionmodel();
+            addque.questions = "";
+            return View("Create");
+        }
+
+        [HttpPost]
+        public ActionResult Create(Questionmodel questionmodel)
+        {
+            try
+            {
+                using (HapinessSurveyEntities entities = new HapinessSurveyEntities())
+                {
+                    //var addques = entities.questiontbls.Where(a => a.q_id.Equals(questionmodel.q_id)).First();
+                    questiontbl ques = new questiontbl();
+                    // List < Questionmodel > qlist = new List<Questionmodel>();                  
+                    ques.question = questionmodel.questions;
+                    entities.questiontbls.Add(ques);
+                    entities.SaveChanges();
+                    return View("question");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+           // return View("Edit");
         }
     }
 }
