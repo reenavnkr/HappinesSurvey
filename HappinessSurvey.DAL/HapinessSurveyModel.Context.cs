@@ -32,5 +32,7 @@ namespace HappinessSurvey.DAL
         public virtual DbSet<surveytbl> surveytbls { get; set; }
         public virtual DbSet<teamtbl> teamtbls { get; set; }
         public virtual DbSet<UserTbl> UserTbls { get; set; }
+
+      //  public System.Data.Entity.DbSet<HappinessSurvey.Model.Models.Questionmodel> Questionmodels { get; set; }
     }
 }

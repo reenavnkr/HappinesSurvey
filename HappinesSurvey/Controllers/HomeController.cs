@@ -14,6 +14,7 @@ namespace HappinesSurvey.Controllers
 {
     public class HomeController : Controller
     {
+
         // GET: Home
         public ActionResult Login()
         {
@@ -48,17 +49,19 @@ namespace HappinesSurvey.Controllers
             {
                 int id = Convert.ToInt32(Session["isuserId"]);
                 ILogin _ud = new Login();
-
+                Loginmodel objlogin = new Loginmodel();
                 UserDisplayViewModel model = new UserDisplayViewModel();
                 model = _ud.isdetail(id);
-       
+                TempData["dep_name"] = model.dep_name;
+                TempData["user_name"] = model.user_name;
+
                 if(Session["isuserId"] != null)
                 {
                     int Roleid = (int)Session["RoleID"];
                     if (Roleid == 1)
                     { //admin
                       // return RedirectToAction("","")
-                        return View("AdminDashboard", model);
+                        return View("AdminDashboard");
                     }
                     else if (Roleid == 2)
                     {//Senior manager
@@ -101,11 +104,11 @@ namespace HappinesSurvey.Controllers
             return RedirectToAction("Login", "Home");
         }
 
-        public ActionResult ModelLayout(UserDisplayViewModel user)
-        {
+        //public ActionResult ModelLayout(UserDisplayViewModel user)
+        //{
            
-            return View();
-        }
+        //    return View();
+        //}
       
     }
 }

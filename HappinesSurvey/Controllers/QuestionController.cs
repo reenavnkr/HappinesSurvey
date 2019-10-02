@@ -8,37 +8,101 @@ using System.Data.Entity;
 using HappinessSurvey.BAL.Interface;
 using HappinessSurvey.BAL.Implementation;
 using HappinessSurvey.Model.ViewModels;
+using HappinessSurvey.Model.Models;
+
+
 
 namespace HappinesSurvey.Controllers
 {
     public class QuestionController : Controller
     {
+   
+      //[App_Start.FilterConfig]
         // GET: Question
-        public ActionResult Index(UserDisplayViewModel user)
+        public ActionResult Index()
         {
-            if (ModelState.IsValid)
-            {
-                int id = Convert.ToInt32(Session["isuserId"]);
-                ILogin _ud = new Login();
-
-                UserDisplayViewModel model = new UserDisplayViewModel();
-                model = _ud.isdetail(id);
-                return View("question", model);
-               
-            }
-                return View("AdminDashboard");
+           
+            return View("question");
         }
 
         public ActionResult getdata()
         {
-            using(HapinessSurveyEntities entities = new HapinessSurveyEntities())
+            try
             {
-                var listdata = from q in entities.questiontbls select q.question;
-               // List < listdata > questionList = new List<listdata>();
-                return Json(new {data= listdata },JsonRequestBehavior.AllowGet);
+                using (HapinessSurveyEntities entities = new HapinessSurveyEntities())
+                {
+                    var listvalue = (from q in entities.questiontbls select q).ToList();
+
+                    List<Questionmodel> questions = new List<Questionmodel>();
+
+                    foreach (var item in listvalue)
+                    {
+                        Questionmodel question = new Questionmodel();
+                        question.q_id = item.q_id;
+                        question.questions = item.question;
+                        questions.Add(question);
+                    }
+
+                    // List<questiontbl> listvalue = entities.questiontbls.ToList<questiontbl>();
+                    return Json(new { data = questions }, JsonRequestBehavior.AllowGet);
+                }
+            }catch(Exception ex)
+            {
+                throw;
             }
                
         }
 
+     
+        [HttpGet]
+        public ActionResult Edit(int? ID)
+        {
+            try
+            {
+                using (HapinessSurveyEntities entities = new HapinessSurveyEntities())
+                {
+                    Questionmodel questionmodel = new Questionmodel();
+                    List<Questionmodel> qlist = new List<Questionmodel>();
+                    var question = (from q in entities.questiontbls
+                                    where q.q_id == ID
+                                    select q).FirstOrDefault();
+                    questionmodel.q_id =  question.q_id;
+                    questionmodel.questions= question.question ;
+                    return View("Edit",questionmodel);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+           
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Questionmodel questionmodel)
+        {
+            try
+            {
+                using (HapinessSurveyEntities entities = new HapinessSurveyEntities())
+                {
+                    var modiques = entities.questiontbls.Where(a => a.q_id.Equals(questionmodel.q_id)).First();
+                    // questionmodel.q_id = modiques.q_id;
+
+                    // List < Questionmodel > qlist = new List<Questionmodel>();                  
+                    modiques.question = questionmodel.questions;
+                    entities.SaveChanges();
+                    return View("question");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+           //eturn View("Edit", questionmodel);
+        }
+        public ActionResult delete()
+        {
+            return View();
+        }
     }
 }

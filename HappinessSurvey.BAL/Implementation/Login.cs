@@ -84,7 +84,8 @@ namespace HappinessSurvey.BAL.Implementation
 
         public  UserDisplayViewModel isdetail(int isuservalue)
         {
-             
+           
+           // int isuservalue = isUserAvailable(Objlogin);
            // List<UserDisplayViewModel> UD = new List<UserDisplayViewModel>();
             UserDisplayViewModel userdep = new UserDisplayViewModel();
             try

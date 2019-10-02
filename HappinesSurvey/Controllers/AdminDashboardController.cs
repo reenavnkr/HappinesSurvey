@@ -8,6 +8,7 @@ namespace HappinesSurvey.Controllers
 {
     public class AdminDashboardController : Controller
     {
+        [App_Start.FilterConfig]
         // GET: AdminDashboard
         public ActionResult Index()
         {

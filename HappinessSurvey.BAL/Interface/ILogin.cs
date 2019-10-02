@@ -13,8 +13,7 @@ namespace HappinessSurvey.BAL.Interface
     {
         int isUserAvailable(Loginmodel Objlogin);
         int isUserRoleID(Loginmodel Objlogin);
-       UserDisplayViewModel isdetail(int isuservalue);
-    
-        
+       UserDisplayViewModel isdetail(int id);
+       
     }
 }

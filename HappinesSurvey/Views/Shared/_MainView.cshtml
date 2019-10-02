@@ -1,8 +1,9 @@
-﻿@model HappinessSurvey.Model.ViewModels.UserDisplayViewModel
-
+﻿
 @{
     Layout = null;
- //  @Html.RenderAction("", "Home")
+    //  @Html.RenderAction("", "Home")
+    //var user = TempData["user_name"].ToString();
+    //var dep = TempData["dep_name"].ToString();
 }
 
 <!DOCTYPE html>
@@ -14,7 +15,7 @@
     @Styles.Render("~/css")
     @Scripts.Render("~/js")
     @Styles.Render("~/Content/bootstrap/css/bootstrap")
-   
+    @RenderSection("script", required: false)
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -35,29 +36,29 @@
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                    
+
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                 Hello,
-                                <span class="hidden-xs"><strong>@Html.DisplayFor(Model => Model.user_name)</strong></span>
+                                Hello,
+                                <span class="hidden-xs"><strong>@TempData["user_name"].ToString()</strong></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 @*<li class="user-header">
-                                    
-                                </li>*@
+
+                                    </li>*@
                                 <li class="user-body">
-                                   Department :  <strong>  @Html.DisplayFor(Model => Model.dep_name)</strong>
-                                       
+                                    Department :  <strong>@TempData["dep_name"].ToString()</strong>
+
                                 </li>
-                              
+
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                  
+
                                     <div class="pull-right">
-                                        <input type="button" class="btn btn-default btn-flat"  value="Log Out" onclick="location.href='@Url.Action("Logout", "Home")'" />
-                                        
+                                        <input type="button" class="btn btn-default btn-flat" value="Log Out" onclick="location.href='@Url.Action("Logout", "Home")'" />
+
                                     </div>
                                 </li>
                             </ul>
@@ -76,11 +77,11 @@
             <section class="sidebar">
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
-                   
-                        <p>Alexander Pierce</p>
-                      
+
+                    <p>Alexander Pierce</p>
+
                 </div>
-              
+
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
@@ -89,18 +90,19 @@
                     {
                         if (rvalue == 1)
                         {
-                            <li> 
+                            <li>
                                 <a href="@Url.Action("Dashboard","Home")">
                                     <i class="glyphicon glyphicon-dashboard"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
-                           <li> <a href="@Url.Action("Index","question")">
-                                <i class="glyphicon glyphicon-pencil"></i>
-                                <span>Question Management</span>
-                            </a>
+                            <li>
+                                <a href="@Url.Action("Index","question")">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                    <span>Question Management</span>
+                                </a>
                             </li>
-                            
+
                         }
                     }
                 </ul>
@@ -111,7 +113,7 @@
         <div class="content-wrapper">
             <section class="content">
                 @RenderBody()
-                </section>
+            </section>
         </div><!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
@@ -122,12 +124,12 @@
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Create the tabs -->
-          
+
         </aside><!-- /.control-sidebar -->
         <!-- Add the sidebar's background. This div must be placed
              immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
-    </body>
+</body>
 
 </html>

@@ -6,44 +6,68 @@
 
 
 <h2>question</h2>
-<div class="box">
-    <div class="box-body">
-        <table id="QuestionTable" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Question</th>
-                </tr>
-            </thead>
-        </table>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-body">
+                <table id="QuestionTable" class="table table-striped table-bordered dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>q_id</th>
+                            <th>Question</th>
+                            <th>edit</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
 <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="//cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="//cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
 
 
+
+@section script{
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
- <script>
-     $(document).ready(function () {
+   <script src="//cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
 
-         $("QuestionTable").DataTable({
+    <script>
 
-             "processing": true, // for show progress bar  
-             "serverSide": true, // for process server side  
-             "filter": false, // this is for disable filter (search box)  
-             "orderMulti": false, // for disable multiple column at once  
-             "pageLength": 5,
+        $(document).ready(function () {
+         
+            $("#QuestionTable").DataTable({
 
-             "ajax": {
-                 "url": "/Question/getdata",
-                 "type": "get",
-                 "dataType": "JSON"
-             },
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "pageLength": 2,
+          
+                "ajax": {
+                    "url": "/question/getdata",
+                    "type": "GET",
+                    "dataType": "JSON"
+                },
+                
+                "columnDefs":
+                    [{
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }],
 
-             "columns":
-                 [{ "data": "Question" }]
-
-         });
-     });
- </script>
-    
+                "columns": [
+                    { data: "q_id"},
+                    { data: "questions" },
+                     {
+                         "render": function (data, type, full, meta) { return '<a class="btn btn-info" href="/question/Edit/' + full.q_id + '">Edit</a>'; }
+                    }, 
+                ]
+                   });
+        });
+    </script>
+}
 
