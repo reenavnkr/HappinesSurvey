@@ -75,6 +75,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HapinessSurveyModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="HapinessSurveyModel1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HapinessSurveyModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="projecttbl.cs">
       <DependentUpon>HapinessSurveyModel.tt</DependentUpon>
     </Compile>
@@ -86,6 +91,9 @@
       <DependentUpon>HapinessSurveyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Submitsurvey.cs">
+      <DependentUpon>HapinessSurveyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="surveyquestion.cs">
       <DependentUpon>HapinessSurveyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="surveytbl.cs">
@@ -101,7 +109,7 @@
   <ItemGroup>
     <EntityDeploy Include="HapinessSurveyModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HapinessSurveyModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>HapinessSurveyModel1.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>

@@ -15,15 +15,16 @@ namespace HappinessSurvey.DAL
     public partial class Submitsurvey
     {
         public int ss_id { get; set; }
-        public int q_id { get; set; }
+        public int sq_id { get; set; }
         public int rating { get; set; }
         public string comment { get; set; }
         public int s_id { get; set; }
         public int u_id { get; set; }
         public int role_id { get; set; }
     
-        public virtual questiontbl questiontbl { get; set; }
         public virtual roletbl roletbl { get; set; }
+        public virtual surveyquestion surveyquestion { get; set; }
+        public virtual surveytbl surveytbl { get; set; }
         public virtual UserTbl UserTbl { get; set; }
     }
 }

@@ -34,31 +34,32 @@
           <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="role_name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Submitsurvey">
           <Key>
             <PropertyRef Name="ss_id" />
-            <PropertyRef Name="q_id" />
-            <PropertyRef Name="rating" />
-            <PropertyRef Name="s_id" />
-            <PropertyRef Name="u_id" />
-            <PropertyRef Name="role_id" />
           </Key>
-          <Property Name="ss_id" Type="int" Nullable="false" />
-          <Property Name="q_id" Type="int" Nullable="false" />
+          <Property Name="ss_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sq_id" Type="int" Nullable="false" />
           <Property Name="rating" Type="int" Nullable="false" />
           <Property Name="comment" Type="nvarchar(max)" />
           <Property Name="s_id" Type="int" Nullable="false" />
           <Property Name="u_id" Type="int" Nullable="false" />
           <Property Name="role_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="surveyquestion">
+          <Key>
+            <PropertyRef Name="sq_id" />
+          </Key>
+          <Property Name="sq_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sur_id" Type="int" Nullable="false" />
+          <Property Name="q_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="surveytbl">
           <Key>
             <PropertyRef Name="sur_id" />
           </Key>
           <Property Name="sur_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="q_id" Type="int" Nullable="false" />
+          <Property Name="sq_id" Type="int" Nullable="false" />
           <Property Name="role_id" Type="int" />
           <Property Name="Start_date" Type="date" Nullable="false" />
           <Property Name="End_date" Type="date" Nullable="false" />
@@ -83,18 +84,6 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
           <Property Name="user_Pass" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Dep_id" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Submitsurvey_questiontbl">
-          <End Role="questiontbl" Type="Self.questiontbl" Multiplicity="1" />
-          <End Role="Submitsurvey" Type="Self.Submitsurvey" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="questiontbl">
-              <PropertyRef Name="q_id" />
-            </Principal>
-            <Dependent Role="Submitsurvey">
-              <PropertyRef Name="q_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Submitsurvey_roletbl">
           <End Role="roletbl" Type="Self.roletbl" Multiplicity="1" />
           <End Role="Submitsurvey" Type="Self.Submitsurvey" Multiplicity="*" />
@@ -104,6 +93,30 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
             </Principal>
             <Dependent Role="Submitsurvey">
               <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Submitsurvey_surveyquestion">
+          <End Role="surveyquestion" Type="Self.surveyquestion" Multiplicity="1" />
+          <End Role="Submitsurvey" Type="Self.Submitsurvey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="surveyquestion">
+              <PropertyRef Name="sq_id" />
+            </Principal>
+            <Dependent Role="Submitsurvey">
+              <PropertyRef Name="sq_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Submitsurvey_surveytbl">
+          <End Role="surveytbl" Type="Self.surveytbl" Multiplicity="1" />
+          <End Role="Submitsurvey" Type="Self.Submitsurvey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="surveytbl">
+              <PropertyRef Name="sur_id" />
+            </Principal>
+            <Dependent Role="Submitsurvey">
+              <PropertyRef Name="s_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -119,27 +132,39 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_surveyquestion_questiontbl">
+          <End Role="questiontbl" Type="Self.questiontbl" Multiplicity="1" />
+          <End Role="surveyquestion" Type="Self.surveyquestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="questiontbl">
+              <PropertyRef Name="q_id" />
+            </Principal>
+            <Dependent Role="surveyquestion">
+              <PropertyRef Name="q_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_surveyquestion_surveytbl">
+          <End Role="surveytbl" Type="Self.surveytbl" Multiplicity="1" />
+          <End Role="surveyquestion" Type="Self.surveyquestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="surveytbl">
+              <PropertyRef Name="sur_id" />
+            </Principal>
+            <Dependent Role="surveyquestion">
+              <PropertyRef Name="sur_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_surveytbl_projecttbl">
           <End Role="projecttbl" Type="Self.projecttbl" Multiplicity="1" />
-          <End Role="surveytbl" Type="Self.surveytbl" Multiplicity="0..1" />
+          <End Role="surveytbl" Type="Self.surveytbl" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="projecttbl">
               <PropertyRef Name="pro_id" />
             </Principal>
             <Dependent Role="surveytbl">
-              <PropertyRef Name="sur_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_surveytbl_questiontbl">
-          <End Role="questiontbl" Type="Self.questiontbl" Multiplicity="1" />
-          <End Role="surveytbl" Type="Self.surveytbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="questiontbl">
-              <PropertyRef Name="q_id" />
-            </Principal>
-            <Dependent Role="surveytbl">
-              <PropertyRef Name="q_id" />
+              <PropertyRef Name="proj_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -208,38 +233,37 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
           <EntitySet Name="projecttbl" EntityType="Self.projecttbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="questiontbl" EntityType="Self.questiontbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="roletbl" EntityType="Self.roletbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Submitsurvey" EntityType="Self.Submitsurvey" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="surveyquestion" EntityType="Self.surveyquestion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="surveytbl" EntityType="Self.surveytbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="teamtbl" EntityType="Self.teamtbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTbl" EntityType="Self.UserTbl" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Submitsurvey" EntityType="Self.Submitsurvey" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Submitsurvey].[ss_id] AS [ss_id], 
-    [Submitsurvey].[q_id] AS [q_id], 
-    [Submitsurvey].[rating] AS [rating], 
-    [Submitsurvey].[comment] AS [comment], 
-    [Submitsurvey].[s_id] AS [s_id], 
-    [Submitsurvey].[u_id] AS [u_id], 
-    [Submitsurvey].[role_id] AS [role_id]
-    FROM [dbo].[Submitsurvey] AS [Submitsurvey]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_Submitsurvey_questiontbl" Association="Self.FK_Submitsurvey_questiontbl">
-            <End Role="questiontbl" EntitySet="questiontbl" />
-            <End Role="Submitsurvey" EntitySet="Submitsurvey" />
-          </AssociationSet>
           <AssociationSet Name="FK_Submitsurvey_roletbl" Association="Self.FK_Submitsurvey_roletbl">
             <End Role="roletbl" EntitySet="roletbl" />
+            <End Role="Submitsurvey" EntitySet="Submitsurvey" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Submitsurvey_surveyquestion" Association="Self.FK_Submitsurvey_surveyquestion">
+            <End Role="surveyquestion" EntitySet="surveyquestion" />
+            <End Role="Submitsurvey" EntitySet="Submitsurvey" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Submitsurvey_surveytbl" Association="Self.FK_Submitsurvey_surveytbl">
+            <End Role="surveytbl" EntitySet="surveytbl" />
             <End Role="Submitsurvey" EntitySet="Submitsurvey" />
           </AssociationSet>
           <AssociationSet Name="FK_Submitsurvey_UserTbl" Association="Self.FK_Submitsurvey_UserTbl">
             <End Role="UserTbl" EntitySet="UserTbl" />
             <End Role="Submitsurvey" EntitySet="Submitsurvey" />
           </AssociationSet>
+          <AssociationSet Name="FK_surveyquestion_questiontbl" Association="Self.FK_surveyquestion_questiontbl">
+            <End Role="questiontbl" EntitySet="questiontbl" />
+            <End Role="surveyquestion" EntitySet="surveyquestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_surveyquestion_surveytbl" Association="Self.FK_surveyquestion_surveytbl">
+            <End Role="surveytbl" EntitySet="surveytbl" />
+            <End Role="surveyquestion" EntitySet="surveyquestion" />
+          </AssociationSet>
           <AssociationSet Name="FK_surveytbl_projecttbl" Association="Self.FK_surveytbl_projecttbl">
             <End Role="projecttbl" EntitySet="projecttbl" />
-            <End Role="surveytbl" EntitySet="surveytbl" />
-          </AssociationSet>
-          <AssociationSet Name="FK_surveytbl_questiontbl" Association="Self.FK_surveytbl_questiontbl">
-            <End Role="questiontbl" EntitySet="questiontbl" />
             <End Role="surveytbl" EntitySet="surveytbl" />
           </AssociationSet>
           <AssociationSet Name="FK_surveytbl_roletbl" Association="Self.FK_surveytbl_roletbl">
@@ -283,7 +307,7 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
           <Property Name="pro_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pro_status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="teamtbls" Relationship="Self.FK_teamtbl_projecttbl" FromRole="projecttbl" ToRole="teamtbl" />
-          <NavigationProperty Name="surveytbl" Relationship="HapinessSurveyModel.FK_surveytbl_projecttbl" FromRole="projecttbl" ToRole="surveytbl" />
+          <NavigationProperty Name="surveytbls" Relationship="HapinessSurveyModel.FK_surveytbl_projecttbl1" FromRole="projecttbl" ToRole="surveytbl" />
         </EntityType>
         <EntityType Name="questiontbl">
           <Key>
@@ -291,8 +315,7 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
           </Key>
           <Property Name="q_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="surveytbls" Relationship="Self.FK_surveytbl_questiontbl" FromRole="questiontbl" ToRole="surveytbl" />
-          <NavigationProperty Name="Submitsurveys" Relationship="HapinessSurveyModel.FK_Submitsurvey_questiontbl" FromRole="questiontbl" ToRole="Submitsurvey" />
+          <NavigationProperty Name="surveyquestions" Relationship="HapinessSurveyModel.FK_surveyquestion_questiontbl" FromRole="questiontbl" ToRole="surveyquestion" />
         </EntityType>
         <EntityType Name="roletbl">
           <Key>
@@ -301,22 +324,23 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
           <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="teamtbls" Relationship="Self.FK_teamtbl_roletbl" FromRole="roletbl" ToRole="teamtbl" />
-          <NavigationProperty Name="Submitsurveys" Relationship="HapinessSurveyModel.FK_Submitsurvey_roletbl" FromRole="roletbl" ToRole="Submitsurvey" />
           <NavigationProperty Name="surveytbls" Relationship="HapinessSurveyModel.FK_surveytbl_roletbl" FromRole="roletbl" ToRole="surveytbl" />
+          <NavigationProperty Name="Submitsurveys" Relationship="HapinessSurveyModel.FK_Submitsurvey_roletbl" FromRole="roletbl" ToRole="Submitsurvey" />
         </EntityType>
         <EntityType Name="surveytbl">
           <Key>
             <PropertyRef Name="sur_id" />
           </Key>
           <Property Name="sur_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="q_id" Type="Int32" Nullable="false" />
           <Property Name="Start_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="End_date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="questiontbl" Relationship="Self.FK_surveytbl_questiontbl" FromRole="surveytbl" ToRole="questiontbl" />
           <Property Name="role_id" Type="Int32" />
           <Property Name="proj_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="projecttbl" Relationship="HapinessSurveyModel.FK_surveytbl_projecttbl" FromRole="surveytbl" ToRole="projecttbl" />
           <NavigationProperty Name="roletbl" Relationship="HapinessSurveyModel.FK_surveytbl_roletbl" FromRole="surveytbl" ToRole="roletbl" />
+          <Property Name="sq_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="projecttbl1" Relationship="HapinessSurveyModel.FK_surveytbl_projecttbl1" FromRole="surveytbl" ToRole="projecttbl" />
+          <NavigationProperty Name="surveyquestions" Relationship="HapinessSurveyModel.FK_surveyquestion_surveytbl" FromRole="surveytbl" ToRole="surveyquestion" />
+          <NavigationProperty Name="Submitsurveys" Relationship="HapinessSurveyModel.FK_Submitsurvey_surveytbl" FromRole="surveytbl" ToRole="Submitsurvey" />
         </EntityType>
         <EntityType Name="teamtbl">
           <Key>
@@ -367,18 +391,6 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_surveytbl_questiontbl">
-          <End Role="questiontbl" Type="Self.questiontbl" Multiplicity="1" />
-          <End Role="surveytbl" Type="Self.surveytbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="questiontbl">
-              <PropertyRef Name="q_id" />
-            </Principal>
-            <Dependent Role="surveytbl">
-              <PropertyRef Name="q_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_teamtbl_roletbl">
           <End Role="roletbl" Type="Self.roletbl" Multiplicity="1" />
           <End Role="teamtbl" Type="Self.teamtbl" Multiplicity="*" />
@@ -419,10 +431,6 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
             <End Role="projecttbl" EntitySet="projecttbls" />
             <End Role="teamtbl" EntitySet="teamtbls" />
           </AssociationSet>
-          <AssociationSet Name="FK_surveytbl_questiontbl" Association="Self.FK_surveytbl_questiontbl">
-            <End Role="questiontbl" EntitySet="questiontbls" />
-            <End Role="surveytbl" EntitySet="surveytbls" />
-          </AssociationSet>
           <AssociationSet Name="FK_teamtbl_roletbl" Association="Self.FK_teamtbl_roletbl">
             <End Role="roletbl" EntitySet="roletbls" />
             <End Role="teamtbl" EntitySet="teamtbls" />
@@ -431,72 +439,116 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
             <End Role="UserTbl" EntitySet="UserTbls" />
             <End Role="teamtbl" EntitySet="teamtbls" />
           </AssociationSet>
-          <EntitySet Name="Submitsurveys" EntityType="HapinessSurveyModel.Submitsurvey" />
-          <AssociationSet Name="FK_surveytbl_projecttbl" Association="HapinessSurveyModel.FK_surveytbl_projecttbl">
+          <AssociationSet Name="FK_surveytbl_roletbl" Association="HapinessSurveyModel.FK_surveytbl_roletbl">
+            <End Role="roletbl" EntitySet="roletbls" />
+            <End Role="surveytbl" EntitySet="surveytbls" />
+          </AssociationSet>
+          <EntitySet Name="surveyquestions" EntityType="HapinessSurveyModel.surveyquestion" />
+          <AssociationSet Name="FK_surveytbl_projecttbl1" Association="HapinessSurveyModel.FK_surveytbl_projecttbl1">
             <End Role="projecttbl" EntitySet="projecttbls" />
             <End Role="surveytbl" EntitySet="surveytbls" />
           </AssociationSet>
-          <AssociationSet Name="FK_Submitsurvey_questiontbl" Association="HapinessSurveyModel.FK_Submitsurvey_questiontbl">
+          <AssociationSet Name="FK_surveyquestion_questiontbl" Association="HapinessSurveyModel.FK_surveyquestion_questiontbl">
             <End Role="questiontbl" EntitySet="questiontbls" />
-            <End Role="Submitsurvey" EntitySet="Submitsurveys" />
+            <End Role="surveyquestion" EntitySet="surveyquestions" />
           </AssociationSet>
+          <AssociationSet Name="FK_surveyquestion_surveytbl" Association="HapinessSurveyModel.FK_surveyquestion_surveytbl">
+            <End Role="surveytbl" EntitySet="surveytbls" />
+            <End Role="surveyquestion" EntitySet="surveyquestions" />
+          </AssociationSet>
+          <EntitySet Name="Submitsurveys" EntityType="HapinessSurveyModel.Submitsurvey" />
           <AssociationSet Name="FK_Submitsurvey_roletbl" Association="HapinessSurveyModel.FK_Submitsurvey_roletbl">
             <End Role="roletbl" EntitySet="roletbls" />
             <End Role="Submitsurvey" EntitySet="Submitsurveys" />
           </AssociationSet>
-          <AssociationSet Name="FK_surveytbl_roletbl" Association="HapinessSurveyModel.FK_surveytbl_roletbl">
-            <End Role="roletbl" EntitySet="roletbls" />
+          <AssociationSet Name="FK_Submitsurvey_surveyquestion" Association="HapinessSurveyModel.FK_Submitsurvey_surveyquestion">
+            <End Role="surveyquestion" EntitySet="surveyquestions" />
+            <End Role="Submitsurvey" EntitySet="Submitsurveys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Submitsurvey_surveytbl" Association="HapinessSurveyModel.FK_Submitsurvey_surveytbl">
             <End Role="surveytbl" EntitySet="surveytbls" />
+            <End Role="Submitsurvey" EntitySet="Submitsurveys" />
           </AssociationSet>
           <AssociationSet Name="FK_Submitsurvey_UserTbl" Association="HapinessSurveyModel.FK_Submitsurvey_UserTbl">
             <End Role="UserTbl" EntitySet="UserTbls" />
             <End Role="Submitsurvey" EntitySet="Submitsurveys" />
           </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Submitsurvey">
+          </EntityContainer>
+        <Association Name="FK_surveytbl_roletbl">
+          <End Type="HapinessSurveyModel.roletbl" Role="roletbl" Multiplicity="0..1" />
+          <End Type="HapinessSurveyModel.surveytbl" Role="surveytbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roletbl">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="surveytbl">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="surveyquestion">
           <Key>
-            <PropertyRef Name="ss_id" />
-            <PropertyRef Name="q_id" />
-            <PropertyRef Name="rating" />
-            <PropertyRef Name="s_id" />
-            <PropertyRef Name="u_id" />
-            <PropertyRef Name="role_id" />
+            <PropertyRef Name="sq_id" />
           </Key>
-          <Property Name="ss_id" Type="Int32" Nullable="false" />
+          <Property Name="sq_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sur_id" Type="Int32" Nullable="false" />
           <Property Name="q_id" Type="Int32" Nullable="false" />
-          <Property Name="rating" Type="Int32" Nullable="false" />
-          <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="s_id" Type="Int32" Nullable="false" />
-          <Property Name="u_id" Type="Int32" Nullable="false" />
-          <Property Name="role_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="questiontbl" Relationship="HapinessSurveyModel.FK_Submitsurvey_questiontbl" FromRole="Submitsurvey" ToRole="questiontbl" />
-          <NavigationProperty Name="roletbl" Relationship="HapinessSurveyModel.FK_Submitsurvey_roletbl" FromRole="Submitsurvey" ToRole="roletbl" />
-          <NavigationProperty Name="UserTbl" Relationship="HapinessSurveyModel.FK_Submitsurvey_UserTbl" FromRole="Submitsurvey" ToRole="UserTbl" />
+          <NavigationProperty Name="questiontbl" Relationship="HapinessSurveyModel.FK_surveyquestion_questiontbl" FromRole="surveyquestion" ToRole="questiontbl" />
+          <NavigationProperty Name="surveytbl" Relationship="HapinessSurveyModel.FK_surveyquestion_surveytbl" FromRole="surveyquestion" ToRole="surveytbl" />
+          <NavigationProperty Name="Submitsurveys" Relationship="HapinessSurveyModel.FK_Submitsurvey_surveyquestion" FromRole="surveyquestion" ToRole="Submitsurvey" />
         </EntityType>
-        <Association Name="FK_surveytbl_projecttbl">
+        <Association Name="FK_surveytbl_projecttbl1">
           <End Type="HapinessSurveyModel.projecttbl" Role="projecttbl" Multiplicity="1" />
-          <End Type="HapinessSurveyModel.surveytbl" Role="surveytbl" Multiplicity="0..1" />
+          <End Type="HapinessSurveyModel.surveytbl" Role="surveytbl" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="projecttbl">
               <PropertyRef Name="pro_id" />
             </Principal>
             <Dependent Role="surveytbl">
-              <PropertyRef Name="sur_id" />
+              <PropertyRef Name="proj_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Submitsurvey_questiontbl">
+        <Association Name="FK_surveyquestion_questiontbl">
           <End Type="HapinessSurveyModel.questiontbl" Role="questiontbl" Multiplicity="1" />
-          <End Type="HapinessSurveyModel.Submitsurvey" Role="Submitsurvey" Multiplicity="*" />
+          <End Type="HapinessSurveyModel.surveyquestion" Role="surveyquestion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="questiontbl">
               <PropertyRef Name="q_id" />
             </Principal>
-            <Dependent Role="Submitsurvey">
+            <Dependent Role="surveyquestion">
               <PropertyRef Name="q_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_surveyquestion_surveytbl">
+          <End Type="HapinessSurveyModel.surveytbl" Role="surveytbl" Multiplicity="1" />
+          <End Type="HapinessSurveyModel.surveyquestion" Role="surveyquestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="surveytbl">
+              <PropertyRef Name="sur_id" />
+            </Principal>
+            <Dependent Role="surveyquestion">
+              <PropertyRef Name="sur_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Submitsurvey">
+          <Key>
+            <PropertyRef Name="ss_id" />
+          </Key>
+          <Property Name="ss_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sq_id" Type="Int32" Nullable="false" />
+          <Property Name="rating" Type="Int32" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="s_id" Type="Int32" Nullable="false" />
+          <Property Name="u_id" Type="Int32" Nullable="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="roletbl" Relationship="HapinessSurveyModel.FK_Submitsurvey_roletbl" FromRole="Submitsurvey" ToRole="roletbl" />
+          <NavigationProperty Name="surveyquestion" Relationship="HapinessSurveyModel.FK_Submitsurvey_surveyquestion" FromRole="Submitsurvey" ToRole="surveyquestion" />
+          <NavigationProperty Name="surveytbl" Relationship="HapinessSurveyModel.FK_Submitsurvey_surveytbl" FromRole="Submitsurvey" ToRole="surveytbl" />
+          <NavigationProperty Name="UserTbl" Relationship="HapinessSurveyModel.FK_Submitsurvey_UserTbl" FromRole="Submitsurvey" ToRole="UserTbl" />
+        </EntityType>
         <Association Name="FK_Submitsurvey_roletbl">
           <End Type="HapinessSurveyModel.roletbl" Role="roletbl" Multiplicity="1" />
           <End Type="HapinessSurveyModel.Submitsurvey" Role="Submitsurvey" Multiplicity="*" />
@@ -509,15 +561,27 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_surveytbl_roletbl">
-          <End Type="HapinessSurveyModel.roletbl" Role="roletbl" Multiplicity="0..1" />
-          <End Type="HapinessSurveyModel.surveytbl" Role="surveytbl" Multiplicity="*" />
+        <Association Name="FK_Submitsurvey_surveyquestion">
+          <End Type="HapinessSurveyModel.surveyquestion" Role="surveyquestion" Multiplicity="1" />
+          <End Type="HapinessSurveyModel.Submitsurvey" Role="Submitsurvey" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="roletbl">
-              <PropertyRef Name="role_id" />
+            <Principal Role="surveyquestion">
+              <PropertyRef Name="sq_id" />
             </Principal>
-            <Dependent Role="surveytbl">
-              <PropertyRef Name="role_id" />
+            <Dependent Role="Submitsurvey">
+              <PropertyRef Name="sq_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Submitsurvey_surveytbl">
+          <End Type="HapinessSurveyModel.surveytbl" Role="surveytbl" Multiplicity="1" />
+          <End Type="HapinessSurveyModel.Submitsurvey" Role="Submitsurvey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="surveytbl">
+              <PropertyRef Name="sur_id" />
+            </Principal>
+            <Dependent Role="Submitsurvey">
+              <PropertyRef Name="s_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -533,7 +597,7 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -575,10 +639,10 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
           <EntitySetMapping Name="surveytbls">
             <EntityTypeMapping TypeName="HapinessSurveyModel.surveytbl">
               <MappingFragment StoreEntitySet="surveytbl">
+                <ScalarProperty Name="sq_id" ColumnName="sq_id" />
                 <ScalarProperty Name="proj_id" ColumnName="proj_id" />
                 <ScalarProperty Name="role_id" ColumnName="role_id" />
                 <ScalarProperty Name="sur_id" ColumnName="sur_id" />
-                <ScalarProperty Name="q_id" ColumnName="q_id" />
                 <ScalarProperty Name="Start_date" ColumnName="Start_date" />
                 <ScalarProperty Name="End_date" ColumnName="End_date" />
               </MappingFragment>
@@ -605,6 +669,15 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="surveyquestions">
+            <EntityTypeMapping TypeName="HapinessSurveyModel.surveyquestion">
+              <MappingFragment StoreEntitySet="surveyquestion">
+                <ScalarProperty Name="q_id" ColumnName="q_id" />
+                <ScalarProperty Name="sur_id" ColumnName="sur_id" />
+                <ScalarProperty Name="sq_id" ColumnName="sq_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Submitsurveys">
             <EntityTypeMapping TypeName="HapinessSurveyModel.Submitsurvey">
               <MappingFragment StoreEntitySet="Submitsurvey">
@@ -613,7 +686,7 @@ warning 6002: The table/view 'HapinessSurvey.dbo.Submitsurvey' does not have a p
                 <ScalarProperty Name="s_id" ColumnName="s_id" />
                 <ScalarProperty Name="comment" ColumnName="comment" />
                 <ScalarProperty Name="rating" ColumnName="rating" />
-                <ScalarProperty Name="q_id" ColumnName="q_id" />
+                <ScalarProperty Name="sq_id" ColumnName="sq_id" />
                 <ScalarProperty Name="ss_id" ColumnName="ss_id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -23,6 +23,7 @@ namespace HappinessSurvey.BAL.Implementation
             {
                 using (var entity = new HapinessSurveyEntities())
                 {
+                   // var obj = from u in entity.UserTbls where  u.user_mail = Objlogin.user_mail && u.user_Pass = Objlogin.user_pass select u.
                      var obj = entity.UserTbls.Where(a => a.user_mail.Equals(Objlogin.user_mail) && a.user_Pass.Equals(Objlogin.user_pass)).FirstOrDefault();
                     if (obj !=null)
                     {
