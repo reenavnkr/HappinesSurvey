@@ -12,17 +12,18 @@ namespace HappinessSurvey.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class surveytbl
+    public partial class Submitsurvey
     {
-        public int sur_id { get; set; }
+        public int ss_id { get; set; }
         public int q_id { get; set; }
-        public System.DateTime Start_date { get; set; }
-        public System.DateTime End_date { get; set; }
-        public Nullable<int> role_id { get; set; }
-        public int proj_id { get; set; }
+        public int rating { get; set; }
+        public string comment { get; set; }
+        public int s_id { get; set; }
+        public int u_id { get; set; }
+        public int role_id { get; set; }
     
         public virtual questiontbl questiontbl { get; set; }
-        public virtual projecttbl projecttbl { get; set; }
         public virtual roletbl roletbl { get; set; }
+        public virtual UserTbl UserTbl { get; set; }
     }
 }

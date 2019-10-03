@@ -85,6 +85,9 @@
     <Compile Include="roletbl.cs">
       <DependentUpon>HapinessSurveyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Submitsurvey.cs">
+      <DependentUpon>HapinessSurveyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="surveytbl.cs">
       <DependentUpon>HapinessSurveyModel.tt</DependentUpon>
     </Compile>
