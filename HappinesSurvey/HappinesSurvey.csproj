@@ -908,9 +908,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AddprojectController.cs" />
+    <Compile Include="Controllers\AddUserController.cs" />
     <Compile Include="Controllers\AdminDashboardController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\GenerateSurveyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\quesController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
+    <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1035,6 +1041,31 @@
     <Content Include="Views\Question\question.cshtml" />
     <Content Include="Views\Question\Edit.cshtml" />
     <Content Include="Views\Question\Create.cshtml" />
+    <Content Include="Views\AddUser\Create.cshtml" />
+    <Content Include="Views\AddUser\Delete.cshtml" />
+    <Content Include="Views\AddUser\Details.cshtml" />
+    <Content Include="Views\AddUser\Edit.cshtml" />
+    <Content Include="Views\AddUser\Index.cshtml" />
+    <Content Include="Views\Addproject\Create.cshtml" />
+    <Content Include="Views\Addproject\Delete.cshtml" />
+    <Content Include="Views\Addproject\Details.cshtml" />
+    <Content Include="Views\Addproject\Edit.cshtml" />
+    <Content Include="Views\Addproject\Index.cshtml" />
+    <Content Include="Views\Team\Create.cshtml" />
+    <Content Include="Views\Team\Delete.cshtml" />
+    <Content Include="Views\Team\Details.cshtml" />
+    <Content Include="Views\Team\Edit.cshtml" />
+    <Content Include="Views\Team\Index.cshtml" />
+    <Content Include="Views\Department\Create.cshtml" />
+    <Content Include="Views\Department\Delete.cshtml" />
+    <Content Include="Views\Department\Details.cshtml" />
+    <Content Include="Views\Department\Edit.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\ques\Create.cshtml" />
+    <Content Include="Views\ques\Delete.cshtml" />
+    <Content Include="Views\ques\Details.cshtml" />
+    <Content Include="Views\ques\Edit.cshtml" />
+    <Content Include="Views\ques\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1046,6 +1077,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\AdminDashboard\" />
+    <Folder Include="Views\GenerateSurvey\" />
     <Folder Include="Views\Mainlayout\" />
   </ItemGroup>
   <ItemGroup>

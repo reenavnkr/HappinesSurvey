@@ -1,0 +1,27 @@
+﻿@model HappinessSurvey.DAL.questiontbl
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>questiontbl</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.question)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.q_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

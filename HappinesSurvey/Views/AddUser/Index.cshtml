@@ -1,0 +1,52 @@
+﻿@model IEnumerable<HappinessSurvey.DAL.UserTbl>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.user_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_mail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_Pass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.departmenttbl.dep_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_mail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_Pass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.departmenttbl.dep_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.user_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.user_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.user_id })
+        </td>
+    </tr>
+}
+
+</table>

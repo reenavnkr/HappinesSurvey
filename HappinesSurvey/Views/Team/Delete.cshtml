@@ -1,0 +1,49 @@
+﻿@model HappinessSurvey.DAL.teamtbl
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>teamtbl</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.projecttbl.pro_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.projecttbl.pro_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.roletbl.role_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.roletbl.role_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserTbl.user_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserTbl.user_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

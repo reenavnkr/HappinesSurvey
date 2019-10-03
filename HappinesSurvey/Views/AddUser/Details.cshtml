@@ -1,0 +1,51 @@
+﻿@model HappinessSurvey.DAL.UserTbl
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserTbl</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.user_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_mail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_mail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_Pass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_Pass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.departmenttbl.dep_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.departmenttbl.dep_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.user_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
