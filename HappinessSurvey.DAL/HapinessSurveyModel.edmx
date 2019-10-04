@@ -58,7 +58,6 @@
             <PropertyRef Name="sur_id" />
           </Key>
           <Property Name="sur_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="sq_id" Type="int" Nullable="false" />
           <Property Name="role_id" Type="int" />
           <Property Name="Start_date" Type="date" Nullable="false" />
           <Property Name="End_date" Type="date" Nullable="false" />
@@ -538,7 +537,6 @@
             <PropertyRef Name="sur_id" />
           </Key>
           <Property Name="sur_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="sq_id" Type="Int32" Nullable="false" />
           <Property Name="role_id" Type="Int32" />
           <Property Name="Start_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="End_date" Type="DateTime" Nullable="false" Precision="0" />
@@ -686,7 +684,6 @@
                 <ScalarProperty Name="End_date" ColumnName="End_date" />
                 <ScalarProperty Name="Start_date" ColumnName="Start_date" />
                 <ScalarProperty Name="role_id" ColumnName="role_id" />
-                <ScalarProperty Name="sq_id" ColumnName="sq_id" />
                 <ScalarProperty Name="sur_id" ColumnName="sur_id" />
               </MappingFragment>
             </EntityTypeMapping>

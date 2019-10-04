@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4e271c2b00644b94a4a7b93fb3e1c859" Name="Diagram1" ZoomLevel="63">
+      <Diagram DiagramId="4e271c2b00644b94a4a7b93fb3e1c859" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="HapinessSurveyModel.departmenttbl" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="HapinessSurveyModel.questiontbl" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="HapinessSurveyModel.roletbl" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
@@ -21,7 +21,7 @@
         <AssociationConnector Association="HapinessSurveyModel.FK_Submitsurvey_UserTbl" />
         <EntityTypeShape EntityType="HapinessSurveyModel.projecttbl" Width="1.5" PointX="3.375" PointY="0.875" />
         <AssociationConnector Association="HapinessSurveyModel.FK_teamtbl_projecttbl" />
-        <EntityTypeShape EntityType="HapinessSurveyModel.surveytbl" Width="1.5" PointX="5.625" PointY="4.375" />
+        <EntityTypeShape EntityType="HapinessSurveyModel.surveytbl" Width="1.5" PointX="5.625" PointY="5.5" />
         <AssociationConnector Association="HapinessSurveyModel.FK_surveytbl_projecttbl" />
         <AssociationConnector Association="HapinessSurveyModel.FK_surveytbl_roletbl" />
         <AssociationConnector Association="HapinessSurveyModel.FK_Submitsurvey_surveytbl" />

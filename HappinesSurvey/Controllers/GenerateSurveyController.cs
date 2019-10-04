@@ -20,11 +20,13 @@ namespace HappinesSurvey.Controllers
                List < SelectListItem > departmentlist = Getdepartment();
                 ViewData["Department"] = departmentlist;
 
-                var prodata = new SelectList(entities.projecttbls.ToList(), "pro_id", "pro_name");
-                ViewData["Project"] = prodata;
+                // var prodata = new SelectList(entities.projecttbls.ToList(), "pro_id", "pro_name");
+                List<SelectListItem> projectlist = Getproject();
+                ViewData["Project"] = projectlist;
 
-                var roledata = new SelectList(entities.roletbls.ToList(), "role_id", "role_name");
-                ViewData["Role"] = roledata;
+                // var roledata = new SelectList(entities.roletbls.ToList(), "role_id", "role_name");
+                List<SelectListItem> rolelist = Getrole();
+                ViewData["Role"] = rolelist;
 
                 var qlist = from q in entities.questiontbls select new { q.q_id,q.question };
 
@@ -46,9 +48,9 @@ namespace HappinesSurvey.Controllers
         public ActionResult Index(List<SelectListItem> items ,FormCollection form )
         {
 
-            string ddldep = form["Department"].ToString();
-            string ddlproj = form["Project"].ToString();
-            string ddlrole = form["Role"].ToString();
+            string ddldep =Request.Form["Departmentddl"].ToString();
+            string ddlproj = Request.Form["Projectddl"].ToString();
+            string ddlrole = Request.Form["Roleddl"].ToString();
 
             using (HapinessSurveyEntities entities = new HapinessSurveyEntities())
             {
@@ -58,35 +60,52 @@ namespace HappinesSurvey.Controllers
                 {
                     if (item.Selected)
                     {
-                        surveyquestion surveyq = new surveyquestion();                       
+                        try
                         {
-                           // var surcreid = (from q in entities.surveytbls select q.sur_id).FirstOrDefault();
-
-                            surveyq.sur_id = 0;
-                            surveyq.q_id = Convert.ToInt32(item.Value);
-                            entities.surveyquestions.Add(surveyq);
-                            entities.SaveChanges();
-                            id = surveyq.sq_id;
-                            if(id != 0)
+                            var surveyCre = new surveytbl();
                             {
-                                var surveyCre = new surveytbl();
+                                surveyCre.role_id = Convert.ToInt32(ddlrole);
+                                surveyCre.Start_date = DateTime.Now;
+                                surveyCre.End_date = DateTime.Today.Date.AddDays(3);
+                                surveyCre.proj_id = Convert.ToInt32(ddlproj);
+                                surveyCre.Dep_id = Convert.ToInt32(ddldep);
+                                entities.surveytbls.Add(surveyCre);
+                                entities.SaveChanges();
+                                ids = surveyCre.sur_id;
+                                entities.SaveChanges();
+
+                                //surveyCre.role_id = 1;
+                                //surveyCre.Start_date = DateTime.Today.Date;
+                                //surveyCre.End_date = DateTime.Today.Date.AddDays(3);
+                                //surveyCre.proj_id = 1;
+                                //surveyCre.Dep_id = 1;
+                                //entities.surveytbls.Add(surveyCre);
+                                //entities.SaveChanges();
+                                //ids = surveyCre.sur_id;
+                                
+                                if (ids != 0)
                                 {
-                                    surveyCre.proj_id = Convert.ToInt32(ddlproj);
-                                    surveyCre.role_id = Convert.ToInt32(ddlrole);
-                                    surveyCre.Dep_id = Convert.ToInt32(ddldep);
-                                    surveyCre.sq_id = Convert.ToInt32(id);
-                                    surveyCre.Start_date = DateTime.Today.Date;
-                                    surveyCre.End_date = DateTime.Today.Date.AddDays(3);
-                                    entities.surveytbls.Add(surveyCre);
-                                    entities.SaveChanges();
-                                    ids = surveyCre.sur_id;
-                                    surveyq.sur_id = ids;
-                                    entities.SaveChanges();
+                                    surveyquestion surveyq = new surveyquestion();
+                                    {
+                                        // var surcreid = (from q in entities.surveytbls select q.sur_id).FirstOrDefault();
+
+                                        surveyq.sur_id = ids;
+                                        surveyq.q_id = Convert.ToInt32(item.Value);
+                                        entities.surveyquestions.Add(surveyq);
+                                        entities.SaveChanges();
+                                        // id = surveyq.sq_id;
+                                    }
+
                                 }
                             }
-                           
-
                         }
+                        catch (Exception ex)
+                        {
+
+                           
+                        }
+                        
+                        
                         // ViewBag.Message += string.Format("{0}\\n", item.Text);
                     }
                 }
@@ -119,7 +138,7 @@ namespace HappinesSurvey.Controllers
 
 
                 //Add Default Item at First Position.
-                departmentList.Insert(0, new SelectListItem { Text = "--Select Customer--", Value = "" });
+                departmentList.Insert(0, new SelectListItem { Text = "--Select Department--", Value = "0" });
                 return departmentList;
             }
         }
@@ -138,7 +157,7 @@ namespace HappinesSurvey.Controllers
 
 
                 //Add Default Item at First Position.
-                projectList.Insert(0, new SelectListItem { Text = "--Select Customer--", Value = "" });
+                projectList.Insert(0, new SelectListItem { Text = "--Select Project--", Value = "0" });
                 return projectList;
             }
 
@@ -159,7 +178,7 @@ namespace HappinesSurvey.Controllers
 
 
                 //Add Default Item at First Position.
-                roleList.Insert(0, new SelectListItem { Text = "--Select Customer--", Value = "" });
+                roleList.Insert(0, new SelectListItem { Text = "--Select Role--", Value = "0" });
                 return roleList;
             }
 

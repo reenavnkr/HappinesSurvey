@@ -22,7 +22,6 @@ namespace HappinessSurvey.DAL
         }
     
         public int sur_id { get; set; }
-        public int sq_id { get; set; }
         public Nullable<int> role_id { get; set; }
         public System.DateTime Start_date { get; set; }
         public System.DateTime End_date { get; set; }

@@ -15,9 +15,7 @@
         <th>
             @Html.DisplayNameFor(model => model.pro_name)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pro_status)
-        </th>
+       
         <th></th>
     </tr>
 
@@ -26,9 +24,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.pro_name)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pro_status)
-        </td>
+        
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.pro_id }) |
             @Html.ActionLink("Details", "Details", new { id=item.pro_id }) |
