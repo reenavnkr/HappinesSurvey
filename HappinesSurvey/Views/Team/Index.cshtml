@@ -5,21 +5,23 @@
     Layout = "~/Views/Shared/_MainView.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Team List</h2>
 
+<div class="box">
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+    <div class="box-body">
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.projecttbl.pro_name)
+           Project Name :
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.roletbl.role_name)
+           Role Name :
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserTbl.user_name)
+           User Name :
         </th>
         <th></th>
     </tr>
@@ -37,10 +39,11 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.team_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.team_id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.team_id })
         </td>
     </tr>
 }
 
 </table>
+</div>
+</div>
