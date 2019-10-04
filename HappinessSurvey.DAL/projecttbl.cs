@@ -23,7 +23,6 @@ namespace HappinessSurvey.DAL
     
         public int pro_id { get; set; }
         public string pro_name { get; set; }
-        public int pro_status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<teamtbl> teamtbls { get; set; }

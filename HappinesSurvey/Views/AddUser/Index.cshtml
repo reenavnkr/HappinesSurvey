@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_MainView.cshtml";
 }
 
-<h2>Index</h2>
+<h2>User</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,16 +13,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.user_name)
+            Name :
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.user_mail)
+           Email :
         </th>
+        @*<th>
+           .user_Pass)
+        </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.user_Pass)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.departmenttbl.dep_name)
+           Department :
         </th>
         <th></th>
     </tr>
@@ -35,15 +35,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.user_mail)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.user_Pass)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.departmenttbl.dep_name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.user_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.user_id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.user_id })
         </td>
     </tr>

@@ -15,4 +15,6 @@ namespace HappinessSurvey.Model.Models
         [Required(ErrorMessage = "Enter question")]
         public string questions { get; set; }
     }
+
+
 }

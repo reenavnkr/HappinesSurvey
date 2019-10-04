@@ -1066,6 +1066,12 @@
     <Content Include="Views\ques\Details.cshtml" />
     <Content Include="Views\ques\Edit.cshtml" />
     <Content Include="Views\ques\Index.cshtml" />
+    <Content Include="Views\GenerateSurvey\Questionlist.cshtml" />
+    <Content Include="Views\Home\SeniorDashboard.cshtml" />
+    <Content Include="Views\Home\ManagerDashboard.cshtml" />
+    <Content Include="Views\Home\TeammemberDashboard.cshtml" />
+    <Content Include="Views\Home\teamladerDashboard.cshtml" />
+    <Content Include="Views\Home\TMTLDashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1077,7 +1083,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\AdminDashboard\" />
-    <Folder Include="Views\GenerateSurvey\" />
     <Folder Include="Views\Mainlayout\" />
   </ItemGroup>
   <ItemGroup>

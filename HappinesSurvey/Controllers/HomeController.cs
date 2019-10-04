@@ -65,19 +65,20 @@ namespace HappinesSurvey.Controllers
                     }
                     else if (Roleid == 2)
                     {//Senior manager
-
-                    }
+                        return View("SeniorDashboard");
+                     }
                     else if (Roleid == 3)
                     { //manager
-
+                        return View("ManagerDashboard");
                     }
                     else if (Roleid == 4)
                     { //team leader
-
+                        return View("teamladerDashboard");
                     }
                     else if (Roleid == 5)
                     { //team mamber
-
+                        return View("TeammemberDashboard");
+                       
                     }
                     else if (Roleid == 0)
                     {
@@ -88,6 +89,8 @@ namespace HappinesSurvey.Controllers
                     {
                         //here also check TL have TM access ?
                         //Roleid 4 and 5
+                        return View("TMTLDashboard");
+
                     }
 
                 }

@@ -17,22 +17,23 @@ namespace HappinessSurvey.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public surveytbl()
         {
-            this.surveyquestions = new HashSet<surveyquestion>();
             this.Submitsurveys = new HashSet<Submitsurvey>();
+            this.surveyquestions = new HashSet<surveyquestion>();
         }
     
         public int sur_id { get; set; }
+        public int sq_id { get; set; }
+        public Nullable<int> role_id { get; set; }
         public System.DateTime Start_date { get; set; }
         public System.DateTime End_date { get; set; }
-        public Nullable<int> role_id { get; set; }
-        public int proj_id { get; set; }
-        public int sq_id { get; set; }
+        public Nullable<int> proj_id { get; set; }
+        public Nullable<int> Dep_id { get; set; }
     
+        public virtual projecttbl projecttbl { get; set; }
         public virtual roletbl roletbl { get; set; }
-        public virtual projecttbl projecttbl1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<surveyquestion> surveyquestions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Submitsurvey> Submitsurveys { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<surveyquestion> surveyquestions { get; set; }
     }
 }

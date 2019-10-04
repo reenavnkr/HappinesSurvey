@@ -78,7 +78,7 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
 
-                    <p>Alexander Pierce</p>
+                    <p>reena vankar</p>
 
                 </div>
 
@@ -126,7 +126,59 @@
                                     <span>User Management</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="@Url.Action("Index","GenerateSurvey")">
+                                    <i class="glyphicon glyphicon-blackboard"></i>
+                                    <span>GenerateSurvey</span>
+                                </a>
+                            </li>
                         }
+                        else if (rvalue == 2)
+                        {
+                            <li>
+                                <a href="@Url.Action("Dashboard","Home")">
+                                    <i class="glyphicon glyphicon-dashboard"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                        }
+                        else if (rvalue == 3)
+                        { //manager
+                            <li>
+                                <a href="@Url.Action("Dashboard","Home")">
+                                    <i class="glyphicon glyphicon-dashboard"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                        }
+                        else if (rvalue == 4)
+                        { //team leader
+                            <li>
+                                <a href="@Url.Action("Dashboard","Home")">
+                                    <i class="glyphicon glyphicon-dashboard"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                        }
+                        else if (rvalue == 5)
+                        { //team mamber
+                            <li>
+                                <a href="@Url.Action("Dashboard","Home")">
+                                    <i class="glyphicon glyphicon-dashboard"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                        }
+                        else if (rvalue == 6)
+                        { //TMTL
+                            <li>
+                                <a href="@Url.Action("Dashboard","Home")">
+                                    <i class="glyphicon glyphicon-dashboard"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                        }
+                    }
                     }
                 </ul>
             </section>

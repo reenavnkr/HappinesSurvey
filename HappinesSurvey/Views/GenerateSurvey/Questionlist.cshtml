@@ -1,0 +1,71 @@
+﻿@model List<SelectListItem>
+
+@{
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Questionlist</title>
+</head>
+<body>
+    
+       
+    <div class="box">
+        @using (Html.BeginForm("Index", "GenerateSurvey", FormMethod.Post))
+        {
+        <div class="box">
+            @*item of type 'IEnumerable<SelectListItem>
+                ' that has the key 'Department'.*@
+
+                <div class="box-body">
+                    <div class="box-success">
+                        Select Department:
+                        @Html.DropDownList("Department", (IEnumerable<SelectListItem>)ViewData["Department"])
+
+                        Select Project :
+                        @Html.DropDownList("Project", (IEnumerable<SelectListItem>)ViewData["Project"])
+
+                        Select Role:
+                        @Html.DropDownList("Role", (IEnumerable<SelectListItem>)ViewData["Role"])
+
+                    </div>
+                </div>
+        </div>
+            <table class="table table-bordered">
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.CheckBoxFor(m => m[i].Selected)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m[i].Text)
+                            @Html.HiddenFor(m => m[i].Value)
+                            @Html.HiddenFor(m => m[i].Text)
+                        </td>
+                    </tr>
+
+                }
+
+            </table>
+
+            <input type="submit" value="Submit" class="btn btn-success" />
+
+            <br />
+
+        }
+        @if (ViewBag.Message != null)
+        {
+            <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+            </script>
+        }
+    </div>
+</body>
+</html>
