@@ -1048,7 +1048,6 @@
     <Content Include="Views\AddUser\Index.cshtml" />
     <Content Include="Views\Addproject\Create.cshtml" />
     <Content Include="Views\Addproject\Delete.cshtml" />
-    <Content Include="Views\Addproject\Details.cshtml" />
     <Content Include="Views\Addproject\Edit.cshtml" />
     <Content Include="Views\Addproject\Index.cshtml" />
     <Content Include="Views\Team\Create.cshtml" />

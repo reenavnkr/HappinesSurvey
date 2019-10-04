@@ -5,29 +5,32 @@
     Layout = "~/Views/Shared/_MainView.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Delete Department</h2>
+<div class="box">
+    <h3>Are you sure you want to delete this?</h3>
+    <div class="box-body">
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Department Name :
+            </dt>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>departmenttbl</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.dep_name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.dep_name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.dep_name)
-        </dd>
+        </dl>
 
-    </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+    </div>
 </div>
