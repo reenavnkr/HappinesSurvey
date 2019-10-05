@@ -57,10 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\EmailOperation.cs" />
     <Compile Include="Implementation\Login.cs" />
     <Compile Include="Interface\ILogin.cs" />
     <Compile Include="Interface\Iquestion.cs" />
     <Compile Include="Interface\IUserdisplay.cs" />
+    <Compile Include="Interface\Isendmail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

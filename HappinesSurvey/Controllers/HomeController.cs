@@ -107,11 +107,16 @@ namespace HappinesSurvey.Controllers
             return RedirectToAction("Login", "Home");
         }
 
+        public ActionResult ForgetPass()
+        {
+          
+            return View("ForgetPass");
+        }
         //public ActionResult ModelLayout(UserDisplayViewModel user)
         //{
-           
+
         //    return View();
         //}
-      
+
     }
 }

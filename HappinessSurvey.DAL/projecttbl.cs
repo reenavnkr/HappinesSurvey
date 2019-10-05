@@ -17,16 +17,16 @@ namespace HappinessSurvey.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public projecttbl()
         {
-            this.teamtbls = new HashSet<teamtbl>();
             this.surveytbls = new HashSet<surveytbl>();
+            this.teamtbls = new HashSet<teamtbl>();
         }
     
         public int pro_id { get; set; }
         public string pro_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<teamtbl> teamtbls { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<surveytbl> surveytbls { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<teamtbl> teamtbls { get; set; }
     }
 }

@@ -8,24 +8,25 @@
         <EntityTypeShape EntityType="HapinessSurveyModel.departmenttbl" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="HapinessSurveyModel.questiontbl" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="HapinessSurveyModel.roletbl" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="HapinessSurveyModel.teamtbl" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="HapinessSurveyModel.UserTbl" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <AssociationConnector Association="HapinessSurveyModel.FK_UserTbl_departmenttbl" ManuallyRouted="false" />
-        <AssociationConnector Association="HapinessSurveyModel.FK_teamtbl_roletbl" ManuallyRouted="false" />
-        <AssociationConnector Association="HapinessSurveyModel.FK_teamtbl_UserTbl" ManuallyRouted="false" />
         <EntityTypeShape EntityType="HapinessSurveyModel.surveyquestion" Width="1.5" PointX="7.5" PointY="9.125" />
         <AssociationConnector Association="HapinessSurveyModel.FK_surveyquestion_questiontbl" />
         <EntityTypeShape EntityType="HapinessSurveyModel.Submitsurvey" Width="1.5" PointX="9.75" PointY="9.375" />
         <AssociationConnector Association="HapinessSurveyModel.FK_Submitsurvey_roletbl" />
         <AssociationConnector Association="HapinessSurveyModel.FK_Submitsurvey_surveyquestion" />
-        <AssociationConnector Association="HapinessSurveyModel.FK_Submitsurvey_UserTbl" />
         <EntityTypeShape EntityType="HapinessSurveyModel.projecttbl" Width="1.5" PointX="3.375" PointY="0.875" />
-        <AssociationConnector Association="HapinessSurveyModel.FK_teamtbl_projecttbl" />
         <EntityTypeShape EntityType="HapinessSurveyModel.surveytbl" Width="1.5" PointX="5.625" PointY="5.5" />
         <AssociationConnector Association="HapinessSurveyModel.FK_surveytbl_projecttbl" />
         <AssociationConnector Association="HapinessSurveyModel.FK_surveytbl_roletbl" />
         <AssociationConnector Association="HapinessSurveyModel.FK_Submitsurvey_surveytbl" />
         <AssociationConnector Association="HapinessSurveyModel.FK_surveyquestion_surveytbl" />
+        <EntityTypeShape EntityType="HapinessSurveyModel.UserTbl" Width="1.5" PointX="3" PointY="4" />
+        <AssociationConnector Association="HapinessSurveyModel.FK_UserTbl_departmenttbl" />
+        <AssociationConnector Association="HapinessSurveyModel.FK_Submitsurvey_UserTbl" />
+        <AssociationConnector Association="HapinessSurveyModel.FK_surveytbl_departmenttbl" />
+        <EntityTypeShape EntityType="HapinessSurveyModel.teamtbl" Width="1.5" PointX="8.625" PointY="5.75" />
+        <AssociationConnector Association="HapinessSurveyModel.FK_teamtbl_projecttbl" />
+        <AssociationConnector Association="HapinessSurveyModel.FK_teamtbl_roletbl" />
+        <AssociationConnector Association="HapinessSurveyModel.FK_teamtbl_UserTbl" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

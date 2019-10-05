@@ -19,8 +19,8 @@ namespace HappinessSurvey.DAL
         public int user_id { get; set; }
         public int role_id { get; set; }
     
+        public virtual projecttbl projecttbl { get; set; }
         public virtual roletbl roletbl { get; set; }
         public virtual UserTbl UserTbl { get; set; }
-        public virtual projecttbl projecttbl { get; set; }
     }
 }

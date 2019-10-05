@@ -24,7 +24,7 @@ namespace HappinessSurvey.DAL
     
         public virtual roletbl roletbl { get; set; }
         public virtual surveyquestion surveyquestion { get; set; }
-        public virtual UserTbl UserTbl { get; set; }
         public virtual surveytbl surveytbl { get; set; }
+        public virtual UserTbl UserTbl { get; set; }
     }
 }
