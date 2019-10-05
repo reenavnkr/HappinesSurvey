@@ -18,7 +18,6 @@ namespace HappinessSurvey.DAL
         public surveytbl()
         {
             this.Submitsurveys = new HashSet<Submitsurvey>();
-            this.surveyquestions = new HashSet<surveyquestion>();
         }
     
         public int sur_id { get; set; }
@@ -28,12 +27,10 @@ namespace HappinessSurvey.DAL
         public Nullable<int> proj_id { get; set; }
         public Nullable<int> Dep_id { get; set; }
     
+        public virtual departmenttbl departmenttbl { get; set; }
         public virtual projecttbl projecttbl { get; set; }
         public virtual roletbl roletbl { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Submitsurvey> Submitsurveys { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<surveyquestion> surveyquestions { get; set; }
-        public virtual departmenttbl departmenttbl { get; set; }
     }
 }

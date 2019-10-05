@@ -25,14 +25,14 @@ namespace HappinessSurvey.DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<departmenttbl> departmenttbls { get; set; }
         public virtual DbSet<questiontbl> questiontbls { get; set; }
         public virtual DbSet<roletbl> roletbls { get; set; }
         public virtual DbSet<surveyquestion> surveyquestions { get; set; }
         public virtual DbSet<Submitsurvey> Submitsurveys { get; set; }
         public virtual DbSet<projecttbl> projecttbls { get; set; }
-        public virtual DbSet<surveytbl> surveytbls { get; set; }
         public virtual DbSet<UserTbl> UserTbls { get; set; }
         public virtual DbSet<teamtbl> teamtbls { get; set; }
+        public virtual DbSet<departmenttbl> departmenttbls { get; set; }
+        public virtual DbSet<surveytbl> surveytbls { get; set; }
     }
 }

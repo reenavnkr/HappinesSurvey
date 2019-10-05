@@ -27,10 +27,10 @@ namespace HappinessSurvey.DAL
         public string user_Pass { get; set; }
         public int Dep_id { get; set; }
     
-        public virtual departmenttbl departmenttbl { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Submitsurvey> Submitsurveys { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<teamtbl> teamtbls { get; set; }
+        public virtual departmenttbl departmenttbl { get; set; }
     }
 }

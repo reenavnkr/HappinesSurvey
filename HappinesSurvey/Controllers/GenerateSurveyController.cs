@@ -54,7 +54,19 @@ namespace HappinesSurvey.Controllers
 
             using (HapinessSurveyEntities entities = new HapinessSurveyEntities())
             {
-                int id,ids;
+                int id, ids;
+                var surveyCre = new surveytbl();
+                {
+                    surveyCre.role_id = Convert.ToInt32(ddlrole);
+                    surveyCre.Start_date = DateTime.Today;
+                    surveyCre.End_date = DateTime.Today.Date.AddDays(3);
+                    surveyCre.proj_id = Convert.ToInt32(ddlproj);
+                    surveyCre.Dep_id = Convert.ToInt32(ddldep);
+                    entities.surveytbls.Add(surveyCre);
+                    entities.SaveChanges();
+                    ids = surveyCre.sur_id;
+                    entities.SaveChanges();
+                }
                 //  ViewBag.Message = "Selected Items:\\n";
                 foreach (SelectListItem item in items)
                 {
@@ -62,57 +74,45 @@ namespace HappinesSurvey.Controllers
                     {
                         try
                         {
-                            var surveyCre = new surveytbl();
+                            //surveyCre.role_id = 1;
+                            //surveyCre.Start_date = DateTime.Today.Date;
+                            //surveyCre.End_date = DateTime.Today.Date.AddDays(3);
+                            //surveyCre.proj_id = 1;
+                            //surveyCre.Dep_id = 1;
+                            //entities.surveytbls.Add(surveyCre);
+                            //entities.SaveChanges();
+                            //ids = surveyCre.sur_id;
+
+                            if (ids != 0)
                             {
-                                surveyCre.role_id = Convert.ToInt32(ddlrole);
-                                surveyCre.Start_date = DateTime.Now;
-                                surveyCre.End_date = DateTime.Today.Date.AddDays(3);
-                                surveyCre.proj_id = Convert.ToInt32(ddlproj);
-                                surveyCre.Dep_id = Convert.ToInt32(ddldep);
-                                entities.surveytbls.Add(surveyCre);
-                                entities.SaveChanges();
-                                ids = surveyCre.sur_id;
-                                entities.SaveChanges();
-
-                                //surveyCre.role_id = 1;
-                                //surveyCre.Start_date = DateTime.Today.Date;
-                                //surveyCre.End_date = DateTime.Today.Date.AddDays(3);
-                                //surveyCre.proj_id = 1;
-                                //surveyCre.Dep_id = 1;
-                                //entities.surveytbls.Add(surveyCre);
-                                //entities.SaveChanges();
-                                //ids = surveyCre.sur_id;
-                                
-                                if (ids != 0)
+                                surveyquestion surveyq = new surveyquestion();
                                 {
-                                    surveyquestion surveyq = new surveyquestion();
-                                    {
-                                        // var surcreid = (from q in entities.surveytbls select q.sur_id).FirstOrDefault();
+                                    // var surcreid = (from q in entities.surveytbls select q.sur_id).FirstOrDefault();
 
-                                        surveyq.sur_id = ids;
-                                        surveyq.q_id = Convert.ToInt32(item.Value);
-                                        entities.surveyquestions.Add(surveyq);
-                                        entities.SaveChanges();
-                                        // id = surveyq.sq_id;
-                                    }
-
+                                    surveyq.sur_id = ids;
+                                    surveyq.q_id = Convert.ToInt32(item.Value);
+                                    entities.surveyquestions.Add(surveyq);
+                                    entities.SaveChanges();
+                                    // id = surveyq.sq_id;
                                 }
+
                             }
+
                         }
                         catch (Exception ex)
                         {
 
-                           
+
                         }
-                        
-                        
+
+
                         // ViewBag.Message += string.Format("{0}\\n", item.Text);
                     }
                 }
-               
-              
+
+
             }
-            
+
 
             return RedirectToAction("Index", "GenerateSurvey");
         }
@@ -169,7 +169,7 @@ namespace HappinesSurvey.Controllers
             using (HapinessSurveyEntities entities = new HapinessSurveyEntities())
             {
 
-                List<SelectListItem> roleList = (from p in entities.roletbls.AsEnumerable()
+                List<SelectListItem> roleList = (from p in entities.roletbls.AsEnumerable().Where(p=>p.role_id > 3)
                                                        select new SelectListItem
                                                        {
                                                            Text = p.role_name.ToString(),

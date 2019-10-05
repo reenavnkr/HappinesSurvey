@@ -23,17 +23,22 @@
 
                 <div class="box-body">
                     <div class="box-success">
-                        Select Department:
-                        @Html.DropDownList("Departmentddl", (IEnumerable<SelectListItem>)ViewData["Department"])
-
-                        Select Project :
-                        @Html.DropDownList("Projectddl", (IEnumerable<SelectListItem>)ViewData["Project"])
-
-                        Select Role:
-                        @Html.DropDownList("Roleddl", (IEnumerable<SelectListItem>)ViewData["Role"])
-
+                        <div class="form-group">
+                            <div class="col-xs-4">
+                                Select Department:
+                                @Html.DropDownList("Departmentddl", (IEnumerable<SelectListItem>)ViewData["Department"], new { @class = "form-control" })
+                            </div>
+                            <div class="col-xs-4">
+                                Select Project :
+                                @Html.DropDownList("Projectddl", (IEnumerable<SelectListItem>)ViewData["Project"], new { @class = "form-control" })
+                                </div>
+                                <div class="col-xs-4">
+                                    Select Role:
+                                    @Html.DropDownList("Roleddl", (IEnumerable<SelectListItem>)ViewData["Role"], new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
                     </div>
-                </div>
         </div>
             <table class="table table-bordered">
                 @for (int i = 0; i < Model.Count(); i++)

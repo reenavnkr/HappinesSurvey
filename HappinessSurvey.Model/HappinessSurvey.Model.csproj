@@ -56,8 +56,8 @@
   <ItemGroup>
     <Compile Include="Models\Loginmodel.cs" />
     <Compile Include="Models\Questionmodel.cs" />
-    <Compile Include="Models\Rating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\Ratingmodel.cs" />
     <Compile Include="ViewModels\UserDisplayViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

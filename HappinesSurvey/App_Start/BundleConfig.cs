@@ -25,7 +25,7 @@ namespace HappinesSurvey.App_Start
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/plugins/jQuery/jQuery-2.1.4.min.js",
                        "~/Scripts/plugins/jQuery/jquery.validate.min.js",
-                        "~/Scripts/plugins/jQuery/jquery.validate.unobtrusive.min",
+                        "~/Scripts/plugins/jQuery/jquery.validate.unobtrusive.min.js",
                       "~/Scripts/plugins/bootstrap/js/bootstrap.min.js",
                       "~/Scripts/plugins/slimScroll/jquery.slimscroll.min.js",
                       "~/Scripts/plugins/fastclick/fastclick.min.js",
