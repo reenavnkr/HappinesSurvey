@@ -110,21 +110,21 @@ namespace HappinesSurvey.Controllers
                     }
                 }
 
-                //int pid = Convert.ToInt32(ddlproj);
-                //var listusers = (from t in entities.teamtbls where t.pro_id == pid select new { t.user_id }).ToList();
+                int pid = Convert.ToInt32(ddlproj);
+                var listusers = (from t in entities.teamtbls where t.pro_id == pid select new { t.user_id }).ToList();
 
-                //userSurvey surveyusers = new userSurvey();
+                userSurvey surveyusers = new userSurvey();
 
-                //foreach(var l in listusers)
-                //{
-                //    surveyusers.user_id = l.user_id;
-                //    surveyusers.sur_id = ids;
-                //    surveyusers.Active = true ;
-                //    entities.userSurveys.Add(surveyusers);
-                //    entities.SaveChanges();
+                foreach (var l in listusers)
+                {
+                    surveyusers.user_id = l.user_id;
+                    surveyusers.sur_id = ids;
+                    surveyusers.Active = true;
+                    entities.userSurveys.Add(surveyusers);
+                    entities.SaveChanges();
 
-                //}
-                
+                }
+
 
             }
 

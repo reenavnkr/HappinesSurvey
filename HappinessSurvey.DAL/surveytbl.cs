@@ -17,6 +17,7 @@ namespace HappinessSurvey.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public surveytbl()
         {
+            this.userSurveys = new HashSet<userSurvey>();
             this.Submitsurveys = new HashSet<Submitsurvey>();
         }
     
@@ -30,6 +31,8 @@ namespace HappinessSurvey.DAL
         public virtual departmenttbl departmenttbl { get; set; }
         public virtual projecttbl projecttbl { get; set; }
         public virtual roletbl roletbl { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<userSurvey> userSurveys { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Submitsurvey> Submitsurveys { get; set; }
     }
