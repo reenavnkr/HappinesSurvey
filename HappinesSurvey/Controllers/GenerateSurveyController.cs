@@ -17,8 +17,8 @@ namespace HappinesSurvey.Controllers
             using (HapinessSurveyEntities entities = new HapinessSurveyEntities())
             {
                 //var depdata = new SelectList(entities.departmenttbls.ToList(),"dep_id","dep_name").to;
-               List < SelectListItem > departmentlist = Getdepartment();
-                ViewData["Department"] = departmentlist;
+               //List < SelectListItem > departmentlist = Getdepartment();
+               // ViewData["Department"] = departmentlist;
 
                 // var prodata = new SelectList(entities.projecttbls.ToList(), "pro_id", "pro_name");
                 List<SelectListItem> projectlist = Getproject();
@@ -48,7 +48,7 @@ namespace HappinesSurvey.Controllers
         public ActionResult Index(List<SelectListItem> items ,FormCollection form )
         {
 
-            string ddldep =Request.Form["Departmentddl"].ToString();
+         //   string ddldep =Request.Form["Departmentddl"].ToString();
             string ddlproj = Request.Form["Projectddl"].ToString();
             string ddlrole = Request.Form["Roleddl"].ToString();
 
@@ -61,7 +61,7 @@ namespace HappinesSurvey.Controllers
                     surveyCre.Start_date = DateTime.Today;
                     surveyCre.End_date = DateTime.Today.Date.AddDays(3);
                     surveyCre.proj_id = Convert.ToInt32(ddlproj);
-                    surveyCre.Dep_id = Convert.ToInt32(ddldep);
+                    surveyCre.Dep_id = 0;
                     entities.surveytbls.Add(surveyCre);
                     entities.SaveChanges();
                     ids = surveyCre.sur_id;
@@ -111,19 +111,40 @@ namespace HappinesSurvey.Controllers
                 }
 
                 int pid = Convert.ToInt32(ddlproj);
-                var listusers = (from t in entities.teamtbls where t.pro_id == pid select new { t.user_id }).ToList();
-
-                userSurvey surveyusers = new userSurvey();
-
-                foreach (var l in listusers)
+                int rid = Convert.ToInt32(ddlrole);
+                if (rid != 0)
                 {
-                    surveyusers.user_id = l.user_id;
-                    surveyusers.sur_id = ids;
-                    surveyusers.Active = true;
-                    entities.userSurveys.Add(surveyusers);
-                    entities.SaveChanges();
+                    var listusers = (from t in entities.teamtbls where t.pro_id == pid  && t.role_id == rid select new { t.user_id }).ToList();
+                    userSurvey surveyusers = new userSurvey();
 
+                    foreach (var l in listusers)
+                    {
+                        surveyusers.user_id = l.user_id;
+                        surveyusers.sur_id = ids;
+                        surveyusers.Active = true;
+                        entities.userSurveys.Add(surveyusers);
+                        entities.SaveChanges();
+
+                    }
                 }
+                else
+                {
+                    var listusers = (from t in entities.teamtbls where t.pro_id == pid select new { t.user_id }).ToList();
+                    userSurvey surveyusers = new userSurvey();
+
+                    foreach (var l in listusers)
+                    {
+                        surveyusers.user_id = l.user_id;
+                        surveyusers.sur_id = ids;
+                        surveyusers.Active = true;
+                        entities.userSurveys.Add(surveyusers);
+                        entities.SaveChanges();
+
+                    }
+                }
+                
+               
+               
 
 
             }
