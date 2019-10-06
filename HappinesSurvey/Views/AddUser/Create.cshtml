@@ -27,7 +27,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.user_mail, "Email :", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.user_mail, new { htmlAttributes = new { @class = "form-control", @data_val = "true", @data_val_required = "Mail Address is required", @data_valmsg = "email", @data_valmsg_replace = "true" } } )
+                        @Html.EditorFor(model => model.user_mail, new { htmlAttributes = new { @class = "form-control", @data_val = "true", @data_val_required = "Mail Address is required", @data_val_msg = "email", @data_val_msg_replace = "true" } } )
                         @Html.ValidationMessageFor(model => model.user_mail, "", new { @class = "text-danger" })
                     </div>
                 </div>

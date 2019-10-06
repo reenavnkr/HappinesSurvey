@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HappinessSurvey.Model.ViewModels.Ratingmodel>
+﻿@model IEnumerable<HappinessSurvey.Model.Models.Questionmodel>
 
 @{
     ViewBag.Title = "Index";
@@ -13,13 +13,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ques)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.rate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.comment)
+            @Html.DisplayNameFor(model => model.questions)
         </th>
         <th></th>
     </tr>
@@ -27,18 +21,12 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ques)
+            @Html.DisplayFor(modelItem => item.questions)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.rate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.comment)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.q_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.q_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.q_id })
         </td>
     </tr>
 }

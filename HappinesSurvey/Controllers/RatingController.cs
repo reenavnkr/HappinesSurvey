@@ -14,10 +14,37 @@ namespace HappinesSurvey.Controllers
         {
             using (HapinessSurveyEntities entities = new HapinessSurveyEntities())
             {
-                //var ratelist = from q in entities.surveyquestions join s in entities.surveytbls on q.sur_id equals s.sur_id
-                //               join t in entities.teamtbls on s.proj_id equals t.pro_id;
-            }
+                //select top 1 sq_id, question from teamtbl as t 
+                //    left join surveytbl as st on t.pro_id = st.proj_id 
+                //    left join surveyquestion as sq on sq.sur_id = st.sur_id 
+                //    left join questiontbl as qt on sq.q_id = qt.q_id 
+                //    where t.user_id = 2  
+                //    order by Start_date desc
+
+                  int id = Convert.ToInt32( Session[""]);
+                var QueRateList = (from t in entities.teamtbls
+                                    join st in entities.surveytbls on t.pro_id equals st.proj_id
+                                    join sq in entities.surveyquestions on st.sur_id equals sq.sur_id
+                                    join qt in entities.questiontbls on sq.sur_id equals qt.q_id
+                                    where t.user_id == id
+                                    orderby st.sur_id descending
+                                    select new
+                                    {
+                                        sq.sq_id ,
+                                        qt.question
+
+                                     }).FirstOrDefault();
+                //  List<>
+                //foreach (var v in  )
+                //{
+
+                //}
                 return View();
+
+
+
+            }
+          
         }
     }
 }

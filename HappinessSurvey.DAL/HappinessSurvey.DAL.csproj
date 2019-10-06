@@ -102,6 +102,9 @@
     <Compile Include="teamtbl.cs">
       <DependentUpon>HapinessSurveyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="userSurvey.cs">
+      <DependentUpon>HapinessSurveyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserTbl.cs">
       <DependentUpon>HapinessSurveyModel.tt</DependentUpon>
     </Compile>
