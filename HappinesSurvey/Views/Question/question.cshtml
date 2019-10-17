@@ -95,7 +95,7 @@
            
             $.post(url, { ID: q_id },
                 function (data) {
-                if (data == "Deleted") {
+                if (data == "Delete") {
                 alert("Delete Customer !");
                 oTable = $('#QuestionTable').DataTable();                
                 oTable.draw();

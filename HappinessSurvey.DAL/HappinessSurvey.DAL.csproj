@@ -60,6 +60,12 @@
     <Compile Include="departmenttbl.cs">
       <DependentUpon>HapinessSurveyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetQuestionByUserId.cs">
+      <DependentUpon>HapinessSurveyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetQuestionByUserId_Result.cs">
+      <DependentUpon>HapinessSurveyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="HapinessSurveyModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

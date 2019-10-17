@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HappinessSurvey.Model.ViewModels
+namespace HappinessSurvey.Model.Models
 {
     public class Ratingmodel
     {
@@ -12,5 +12,11 @@ namespace HappinessSurvey.Model.ViewModels
         public string ques { get; set; }
         public int rate { get; set; }
         public string comment { get; set; }
+
+        public int sur_id { get; set; }
+
+        public int sq_id { get; set; }
+
+
     }
 }

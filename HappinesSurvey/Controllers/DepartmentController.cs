@@ -17,7 +17,13 @@ namespace HappinesSurvey.Controllers
         // GET: Department
         public ActionResult Index()
         {
+            if (Session["RoleID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View(db.departmenttbls.ToList());
+          
+         
         }
 
         // GET: Department/Details/5

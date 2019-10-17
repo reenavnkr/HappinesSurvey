@@ -12,7 +12,12 @@ namespace HappinesSurvey.Controllers
         // GET: AdminDashboard
         public ActionResult Index()
         {
+            if (Session["RoleID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View("~/Home/AdminDashboard");
+           
         }
        
     }

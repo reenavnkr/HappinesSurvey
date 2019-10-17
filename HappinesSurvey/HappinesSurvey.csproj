@@ -116,6 +116,7 @@
     <Content Include="Content\bootstrap\css\bootstrap.css" />
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\rate\rating.css" />
     <Content Include="Scripts\plugins\bootstrap\js\bootstrap.js" />
     <Content Include="Scripts\plugins\bootstrap\js\bootstrap.min.js" />
     <Content Include="Scripts\plugins\bootstrap\js\npm.js" />
@@ -664,6 +665,7 @@
     <Content Include="Scripts\plugins\daterangepicker\daterangepicker.js" />
     <Content Include="Scripts\plugins\daterangepicker\moment.js" />
     <Content Include="Scripts\plugins\daterangepicker\moment.min.js" />
+    <Content Include="Scripts\plugins\emoji\emoji.js" />
     <Content Include="Scripts\plugins\fastclick\fastclick.js" />
     <Content Include="Scripts\plugins\fastclick\fastclick.min.js" />
     <Content Include="Scripts\plugins\flot\excanvas.js" />
@@ -918,7 +920,7 @@
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
-    <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\teamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1067,12 +1069,12 @@
     <Content Include="Views\Home\teamladerDashboard.cshtml" />
     <Content Include="Views\Home\TMTLDashboard.cshtml" />
     <Content Include="Views\Home\ForgetPass.cshtml" />
-    <Content Include="Views\Team\Create.cshtml" />
-    <Content Include="Views\Team\Delete.cshtml" />
-    <Content Include="Views\Team\Details.cshtml" />
-    <Content Include="Views\Team\Edit.cshtml" />
-    <Content Include="Views\Team\Index.cshtml" />
     <Content Include="Views\Rating\Index.cshtml" />
+    <Content Include="Views\team\Create.cshtml" />
+    <Content Include="Views\team\Delete.cshtml" />
+    <Content Include="Views\team\Details.cshtml" />
+    <Content Include="Views\team\Edit.cshtml" />
+    <Content Include="Views\team\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

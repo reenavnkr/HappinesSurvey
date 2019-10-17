@@ -17,8 +17,14 @@ namespace HappinesSurvey.Controllers
         // GET: AddUser
         public ActionResult Index()
         {
+            if (Session["RoleID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var userTbls = db.UserTbls.Include(u => u.departmenttbl);
             return View(userTbls.ToList());
+           
+           
         }
 
         // GET: AddUser/Details/5

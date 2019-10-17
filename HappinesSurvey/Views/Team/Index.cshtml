@@ -5,24 +5,26 @@
     Layout = "~/Views/Shared/_MainView.cshtml";
 }
 
-<h2>Team List</h2>
+<h2>Index</h2>
 
-<div class="box">
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-    <div class="box-body">
 <table class="table">
     <tr>
         <th>
-           Project Name :
+            @Html.DisplayNameFor(model => model.projecttbl.pro_name)
         </th>
         <th>
-           Role Name :
+            @Html.DisplayNameFor(model => model.roletbl.role_name)
         </th>
         <th>
-           User Name :
+            @Html.DisplayNameFor(model => model.departmenttbl.dep_name)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserTbl.user_name)
+        </th>
+
         <th></th>
     </tr>
 
@@ -35,15 +37,18 @@
             @Html.DisplayFor(modelItem => item.roletbl.role_name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserTbl.user_name)
+            @Html.DisplayFor(modelItem => item.departmenttbl.dep_name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.team_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.team_id })
+            @Html.DisplayFor(modelItem => item.UserTbl.user_name)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.team_id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.team_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.team_id })
         </td>
     </tr>
 }
 
 </table>
-</div>
-</div>

@@ -17,6 +17,11 @@ namespace HappinesSurvey.Controllers
         // GET: Addproject
         public ActionResult Index()
         {
+            if (Session["RoleID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+             
+            }
             return View(db.projecttbls.ToList());
         }
 

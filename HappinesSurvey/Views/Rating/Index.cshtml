@@ -1,34 +1,101 @@
-﻿@model IEnumerable<HappinessSurvey.Model.Models.Questionmodel>
+﻿@model IEnumerable<HappinessSurvey.Model.Models.Ratingmodel>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MainView.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Survey</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.questions)
-        </th>
-        <th></th>
-    </tr>
+<div class="box">
+    <div class="box-body">
+        @using (Html.BeginForm("Index", "Rating", FormMethod.Post))
+        {
+            <div class="form-group">
+                
+                <table class="table">
+                   
+                    @{int ii = 1;}
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="box-header">
+                                    <span>@ii</span>) @Html.DisplayFor(modelItem => item.ques)
+                                    @{ii++;}
+                                </div>
+                                <br />
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.questions)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.q_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.q_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.q_id })
-        </td>
-    </tr>
+                                @for (int i = 1; i <= 5; i++)
+                                {
+
+                                    // @Html.RadioButtonFor,3,new {@class= "flat-red")
+                                    if (i == 3)
+                                    {
+                                        <input checked type="radio" id="rank+@item.sq_id" name="rank+@item.sq_id" value="@i" class="flat-red" />@i
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" id="rank+@item.sq_id" name="rank+@item.sq_id" value="@i" class="flat-red" />@i
+                                    }
+                                }
+
+                                <br />
+                                <hr />
+                                <label>Comment :</label>
+                                <input type="hidden" name="surveryid+@item.sq_id" value="@item.sur_id" />
+                                <input type="hidden" name="questionid" value="@item.sq_id" />
+
+                                <input type="text" id="comment+@item.sq_id" name="comment+@item.sq_id" value="" class="form-control" />
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td>
+                            <input type="submit" value="submit" id="submitsurvery" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
+@section script{
+    
+<script>
+
+function checkRank(){
+
+    document.getElementsByName('questionid');    
+    
+    var x = document.getElementsByName("questionid");
+    var i;
+    for (i = 0; i < x.length; i++) {
+        var questionid = x[i];
+
+        var ranks = document.getElementsByName("rank+" + questionid);
+
+        for (j = 0; j < ranks.length; j++) {
+            var onechecked = false;
+            if (ranks[j].type == "checkbox" && ranks[j].checked) {
+                onechecked = true;
+            }
+
+            if (!onechecked) {
+                alert("Please rate all question.");
+                return false;
+            }
+        }
+    }
+    
 }
 
-</table>
+
+
+</script>    
+
+
+
+
+}

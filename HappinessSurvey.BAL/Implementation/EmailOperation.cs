@@ -13,7 +13,7 @@ namespace HappinessSurvey.BAL.Implementation
         public static string SendEmail(string toAddress, string subject, string body)
         {
             string result = "Message Sent Successfully..!!";
-            string senderID = "MyHapinessSurvey@gmail.com";// use sender’s email id here..
+            string senderID = "myhapinesssurvey@gmail.com";// use sender’s email id here..
             const string senderPassword = "vankar###"; // sender password here…
             try
             {
@@ -23,7 +23,7 @@ namespace HappinessSurvey.BAL.Implementation
                     Port = 587,
                     EnableSsl = true,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
-                    Credentials = new System.Net.NetworkCredential(senderID, senderPassword),
+                    Credentials = new System.Net.NetworkCredential("myhapinesssurvey@gmail.com", "vankar###"),
                     Timeout = 30000,
                 };
                 MailMessage message = new MailMessage(senderID, toAddress, subject, body);

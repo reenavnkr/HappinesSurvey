@@ -21,8 +21,13 @@ namespace HappinesSurvey.Controllers
         // GET: Question
         public ActionResult Index()
         {
-           
+            if (Session["RoleID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View("question");
+           
+            
         }
 
         public ActionResult getdata()
@@ -121,7 +126,7 @@ namespace HappinesSurvey.Controllers
                         var deleteques = entities.questiontbls.Find(id);
                         entities.questiontbls.Remove(deleteques);
                         entities.SaveChanges();
-                        return Json(new { data = "Deleted" }, JsonRequestBehavior.AllowGet);
+                        return Json(new { data = "Delete" }, JsonRequestBehavior.AllowGet);
                     
                 }
                

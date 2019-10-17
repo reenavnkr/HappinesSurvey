@@ -40,9 +40,10 @@
           <Property Name="ss_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="rating" Type="int" Nullable="false" />
           <Property Name="comment" Type="nvarchar(max)" />
-          <Property Name="s_id" Type="int" Nullable="false" />
+          <Property Name="sur_id" Type="int" Nullable="false" />
           <Property Name="u_id" Type="int" Nullable="false" />
           <Property Name="role_id" Type="int" Nullable="false" />
+          <Property Name="sq_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="surveyquestion">
           <Key>
@@ -68,6 +69,7 @@
             <PropertyRef Name="team_id" />
           </Key>
           <Property Name="team_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dep_id" Type="int" />
           <Property Name="pro_id" Type="int" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="role_id" Type="int" Nullable="false" />
@@ -104,6 +106,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Submitsurvey_surveyquestion">
+          <End Role="surveyquestion" Type="Self.surveyquestion" Multiplicity="1" />
+          <End Role="Submitsurvey" Type="Self.Submitsurvey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="surveyquestion">
+              <PropertyRef Name="sq_id" />
+            </Principal>
+            <Dependent Role="Submitsurvey">
+              <PropertyRef Name="sq_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Submitsurvey_surveytbl">
           <End Role="surveytbl" Type="Self.surveytbl" Multiplicity="1" />
           <End Role="Submitsurvey" Type="Self.Submitsurvey" Multiplicity="*" />
@@ -112,7 +126,7 @@
               <PropertyRef Name="sur_id" />
             </Principal>
             <Dependent Role="Submitsurvey">
-              <PropertyRef Name="s_id" />
+              <PropertyRef Name="sur_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -173,6 +187,18 @@
             </Principal>
             <Dependent Role="surveytbl">
               <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_teamtbl_departmenttbl">
+          <End Role="departmenttbl" Type="Self.departmenttbl" Multiplicity="0..1" />
+          <End Role="teamtbl" Type="Self.teamtbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departmenttbl">
+              <PropertyRef Name="dep_id" />
+            </Principal>
+            <Dependent Role="teamtbl">
+              <PropertyRef Name="dep_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -265,6 +291,10 @@
             <End Role="roletbl" EntitySet="roletbl" />
             <End Role="Submitsurvey" EntitySet="Submitsurvey" />
           </AssociationSet>
+          <AssociationSet Name="FK_Submitsurvey_surveyquestion" Association="Self.FK_Submitsurvey_surveyquestion">
+            <End Role="surveyquestion" EntitySet="surveyquestion" />
+            <End Role="Submitsurvey" EntitySet="Submitsurvey" />
+          </AssociationSet>
           <AssociationSet Name="FK_Submitsurvey_surveytbl" Association="Self.FK_Submitsurvey_surveytbl">
             <End Role="surveytbl" EntitySet="surveytbl" />
             <End Role="Submitsurvey" EntitySet="Submitsurvey" />
@@ -288,6 +318,10 @@
           <AssociationSet Name="FK_surveytbl_roletbl" Association="Self.FK_surveytbl_roletbl">
             <End Role="roletbl" EntitySet="roletbl" />
             <End Role="surveytbl" EntitySet="surveytbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_teamtbl_departmenttbl" Association="Self.FK_teamtbl_departmenttbl">
+            <End Role="departmenttbl" EntitySet="departmenttbl" />
+            <End Role="teamtbl" EntitySet="teamtbl" />
           </AssociationSet>
           <AssociationSet Name="FK_teamtbl_projecttbl" Association="Self.FK_teamtbl_projecttbl">
             <End Role="projecttbl" EntitySet="projecttbl" />
@@ -332,9 +366,9 @@
           </Key>
           <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="teamtbls" Relationship="HapinessSurveyModel.FK_teamtbl_roletbl" FromRole="roletbl" ToRole="teamtbl" />
           <NavigationProperty Name="surveytbls" Relationship="HapinessSurveyModel.FK_surveytbl_roletbl" FromRole="roletbl" ToRole="surveytbl" />
           <NavigationProperty Name="Submitsurveys" Relationship="HapinessSurveyModel.FK_Submitsurvey_roletbl" FromRole="roletbl" ToRole="Submitsurvey" />
+          <NavigationProperty Name="teamtbls" Relationship="HapinessSurveyModel.FK_teamtbl_roletbl" FromRole="roletbl" ToRole="teamtbl" />
         </EntityType>
         <EntityContainer Name="HapinessSurveyEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="questiontbls" EntityType="Self.questiontbl" />
@@ -346,19 +380,6 @@
           </AssociationSet>
           <EntitySet Name="projecttbls" EntityType="HapinessSurveyModel.projecttbl" />
           <EntitySet Name="UserTbls" EntityType="HapinessSurveyModel.UserTbl" />
-          <EntitySet Name="teamtbls" EntityType="HapinessSurveyModel.teamtbl" />
-          <AssociationSet Name="FK_teamtbl_projecttbl" Association="HapinessSurveyModel.FK_teamtbl_projecttbl">
-            <End Role="projecttbl" EntitySet="projecttbls" />
-            <End Role="teamtbl" EntitySet="teamtbls" />
-          </AssociationSet>
-          <AssociationSet Name="FK_teamtbl_roletbl" Association="HapinessSurveyModel.FK_teamtbl_roletbl">
-            <End Role="roletbl" EntitySet="roletbls" />
-            <End Role="teamtbl" EntitySet="teamtbls" />
-          </AssociationSet>
-          <AssociationSet Name="FK_teamtbl_UserTbl" Association="HapinessSurveyModel.FK_teamtbl_UserTbl">
-            <End Role="UserTbl" EntitySet="UserTbls" />
-            <End Role="teamtbl" EntitySet="teamtbls" />
-          </AssociationSet>
           <EntitySet Name="departmenttbls" EntityType="HapinessSurveyModel.departmenttbl" />
           <AssociationSet Name="FK_UserTbl_departmenttbl" Association="HapinessSurveyModel.FK_UserTbl_departmenttbl">
             <End Role="departmenttbl" EntitySet="departmenttbls" />
@@ -386,9 +407,16 @@
             <End Role="UserTbl" EntitySet="UserTbls" />
             <End Role="userSurvey" EntitySet="userSurveys" />
           </AssociationSet>
+          <FunctionImport Name="GetQuestionByUserId" ReturnType="Collection(HapinessSurveyModel.GetQuestionByUserId)">
+          <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <EntitySet Name="Submitsurveys" EntityType="HapinessSurveyModel.Submitsurvey" />
           <AssociationSet Name="FK_Submitsurvey_roletbl" Association="HapinessSurveyModel.FK_Submitsurvey_roletbl">
             <End Role="roletbl" EntitySet="roletbls" />
+            <End Role="Submitsurvey" EntitySet="Submitsurveys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Submitsurvey_surveyquestion" Association="HapinessSurveyModel.FK_Submitsurvey_surveyquestion">
+            <End Role="surveyquestion" EntitySet="surveyquestions" />
             <End Role="Submitsurvey" EntitySet="Submitsurveys" />
           </AssociationSet>
           <AssociationSet Name="FK_Submitsurvey_surveytbl" Association="HapinessSurveyModel.FK_Submitsurvey_surveytbl">
@@ -399,6 +427,23 @@
             <End Role="UserTbl" EntitySet="UserTbls" />
             <End Role="Submitsurvey" EntitySet="Submitsurveys" />
           </AssociationSet>
+          <EntitySet Name="teamtbls" EntityType="HapinessSurveyModel.teamtbl" />
+          <AssociationSet Name="FK_teamtbl_projecttbl" Association="HapinessSurveyModel.FK_teamtbl_projecttbl">
+            <End Role="projecttbl" EntitySet="projecttbls" />
+            <End Role="teamtbl" EntitySet="teamtbls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_teamtbl_roletbl" Association="HapinessSurveyModel.FK_teamtbl_roletbl">
+            <End Role="roletbl" EntitySet="roletbls" />
+            <End Role="teamtbl" EntitySet="teamtbls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_teamtbl_UserTbl" Association="HapinessSurveyModel.FK_teamtbl_UserTbl">
+            <End Role="UserTbl" EntitySet="UserTbls" />
+            <End Role="teamtbl" EntitySet="teamtbls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_teamtbl_departmenttbl" Association="HapinessSurveyModel.FK_teamtbl_departmenttbl">
+            <End Role="departmenttbl" EntitySet="departmenttbls" />
+            <End Role="teamtbl" EntitySet="teamtbls" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="surveyquestion">
           <Key>
@@ -408,6 +453,7 @@
           <Property Name="sur_id" Type="Int32" Nullable="false" />
           <Property Name="q_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="questiontbl" Relationship="HapinessSurveyModel.FK_surveyquestion_questiontbl" FromRole="surveyquestion" ToRole="questiontbl" />
+          <NavigationProperty Name="Submitsurveys" Relationship="HapinessSurveyModel.FK_Submitsurvey_surveyquestion" FromRole="surveyquestion" ToRole="Submitsurvey" />
         </EntityType>
         <Association Name="FK_surveyquestion_questiontbl">
           <End Type="HapinessSurveyModel.questiontbl" Role="questiontbl" Multiplicity="1" />
@@ -427,8 +473,8 @@
           </Key>
           <Property Name="pro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="pro_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="teamtbls" Relationship="HapinessSurveyModel.FK_teamtbl_projecttbl" FromRole="projecttbl" ToRole="teamtbl" />
           <NavigationProperty Name="surveytbls" Relationship="HapinessSurveyModel.FK_surveytbl_projecttbl" FromRole="projecttbl" ToRole="surveytbl" />
+          <NavigationProperty Name="teamtbls" Relationship="HapinessSurveyModel.FK_teamtbl_projecttbl" FromRole="projecttbl" ToRole="teamtbl" />
         </EntityType>
         <EntityType Name="UserTbl">
           <Key>
@@ -439,59 +485,11 @@
           <Property Name="user_mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="user_Pass" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Dep_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="teamtbls" Relationship="HapinessSurveyModel.FK_teamtbl_UserTbl" FromRole="UserTbl" ToRole="teamtbl" />
           <NavigationProperty Name="departmenttbl" Relationship="HapinessSurveyModel.FK_UserTbl_departmenttbl" FromRole="UserTbl" ToRole="departmenttbl" />
           <NavigationProperty Name="userSurveys" Relationship="HapinessSurveyModel.FK_userSurvey_UserTbl" FromRole="UserTbl" ToRole="userSurvey" />
           <NavigationProperty Name="Submitsurveys" Relationship="HapinessSurveyModel.FK_Submitsurvey_UserTbl" FromRole="UserTbl" ToRole="Submitsurvey" />
+          <NavigationProperty Name="teamtbls" Relationship="HapinessSurveyModel.FK_teamtbl_UserTbl" FromRole="UserTbl" ToRole="teamtbl" />
         </EntityType>
-        <EntityType Name="teamtbl">
-          <Key>
-            <PropertyRef Name="team_id" />
-          </Key>
-          <Property Name="team_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="pro_id" Type="Int32" Nullable="false" />
-          <Property Name="user_id" Type="Int32" Nullable="false" />
-          <Property Name="role_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="projecttbl" Relationship="HapinessSurveyModel.FK_teamtbl_projecttbl" FromRole="teamtbl" ToRole="projecttbl" />
-          <NavigationProperty Name="roletbl" Relationship="HapinessSurveyModel.FK_teamtbl_roletbl" FromRole="teamtbl" ToRole="roletbl" />
-          <NavigationProperty Name="UserTbl" Relationship="HapinessSurveyModel.FK_teamtbl_UserTbl" FromRole="teamtbl" ToRole="UserTbl" />
-        </EntityType>
-        <Association Name="FK_teamtbl_projecttbl">
-          <End Type="HapinessSurveyModel.projecttbl" Role="projecttbl" Multiplicity="1" />
-          <End Type="HapinessSurveyModel.teamtbl" Role="teamtbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="projecttbl">
-              <PropertyRef Name="pro_id" />
-            </Principal>
-            <Dependent Role="teamtbl">
-              <PropertyRef Name="pro_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_teamtbl_roletbl">
-          <End Type="HapinessSurveyModel.roletbl" Role="roletbl" Multiplicity="1" />
-          <End Type="HapinessSurveyModel.teamtbl" Role="teamtbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="roletbl">
-              <PropertyRef Name="role_id" />
-            </Principal>
-            <Dependent Role="teamtbl">
-              <PropertyRef Name="role_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_teamtbl_UserTbl">
-          <End Type="HapinessSurveyModel.UserTbl" Role="UserTbl" Multiplicity="1" />
-          <End Type="HapinessSurveyModel.teamtbl" Role="teamtbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserTbl">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="teamtbl">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="departmenttbl">
           <Key>
             <PropertyRef Name="dep_id" />
@@ -500,6 +498,7 @@
           <Property Name="dep_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="UserTbls" Relationship="HapinessSurveyModel.FK_UserTbl_departmenttbl" FromRole="departmenttbl" ToRole="UserTbl" />
           <NavigationProperty Name="surveytbls" Relationship="HapinessSurveyModel.FK_surveytbl_departmenttbl" FromRole="departmenttbl" ToRole="surveytbl" />
+          <NavigationProperty Name="teamtbls" Relationship="HapinessSurveyModel.FK_teamtbl_departmenttbl" FromRole="departmenttbl" ToRole="teamtbl" />
         </EntityType>
         <Association Name="FK_UserTbl_departmenttbl">
           <End Type="HapinessSurveyModel.departmenttbl" Role="departmenttbl" Multiplicity="1">
@@ -603,6 +602,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetQuestionByUserId_Result">
+          <Property Type="Int32" Name="sq_id" Nullable="true" />
+          <Property Type="String" Name="question" Nullable="true" />
+          <Property Type="Int32" Name="sur_id" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetQuestionByUserId">
+          <Property Type="Int32" Name="sq_id" Nullable="true" />
+          <Property Type="String" Name="question" Nullable="true" />
+        </ComplexType>
         <EntityType Name="Submitsurvey">
           <Key>
             <PropertyRef Name="ss_id" />
@@ -610,10 +618,12 @@
           <Property Name="ss_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="rating" Type="Int32" Nullable="false" />
           <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="s_id" Type="Int32" Nullable="false" />
+          <Property Name="sur_id" Type="Int32" Nullable="false" />
           <Property Name="u_id" Type="Int32" Nullable="false" />
           <Property Name="role_id" Type="Int32" Nullable="false" />
+          <Property Name="sq_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="roletbl" Relationship="HapinessSurveyModel.FK_Submitsurvey_roletbl" FromRole="Submitsurvey" ToRole="roletbl" />
+          <NavigationProperty Name="surveyquestion" Relationship="HapinessSurveyModel.FK_Submitsurvey_surveyquestion" FromRole="Submitsurvey" ToRole="surveyquestion" />
           <NavigationProperty Name="surveytbl" Relationship="HapinessSurveyModel.FK_Submitsurvey_surveytbl" FromRole="Submitsurvey" ToRole="surveytbl" />
           <NavigationProperty Name="UserTbl" Relationship="HapinessSurveyModel.FK_Submitsurvey_UserTbl" FromRole="Submitsurvey" ToRole="UserTbl" />
         </EntityType>
@@ -629,6 +639,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Submitsurvey_surveyquestion">
+          <End Type="HapinessSurveyModel.surveyquestion" Role="surveyquestion" Multiplicity="1" />
+          <End Type="HapinessSurveyModel.Submitsurvey" Role="Submitsurvey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="surveyquestion">
+              <PropertyRef Name="sq_id" />
+            </Principal>
+            <Dependent Role="Submitsurvey">
+              <PropertyRef Name="sq_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Submitsurvey_surveytbl">
           <End Type="HapinessSurveyModel.surveytbl" Role="surveytbl" Multiplicity="1" />
           <End Type="HapinessSurveyModel.Submitsurvey" Role="Submitsurvey" Multiplicity="*" />
@@ -637,7 +659,7 @@
               <PropertyRef Name="sur_id" />
             </Principal>
             <Dependent Role="Submitsurvey">
-              <PropertyRef Name="s_id" />
+              <PropertyRef Name="sur_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -650,6 +672,68 @@
             </Principal>
             <Dependent Role="Submitsurvey">
               <PropertyRef Name="u_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="teamtbl">
+          <Key>
+            <PropertyRef Name="team_id" />
+          </Key>
+          <Property Name="team_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dep_id" Type="Int32" />
+          <Property Name="pro_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="projecttbl" Relationship="HapinessSurveyModel.FK_teamtbl_projecttbl" FromRole="teamtbl" ToRole="projecttbl" />
+          <NavigationProperty Name="roletbl" Relationship="HapinessSurveyModel.FK_teamtbl_roletbl" FromRole="teamtbl" ToRole="roletbl" />
+          <NavigationProperty Name="UserTbl" Relationship="HapinessSurveyModel.FK_teamtbl_UserTbl" FromRole="teamtbl" ToRole="UserTbl" />
+          <NavigationProperty Name="departmenttbl" Relationship="HapinessSurveyModel.FK_teamtbl_departmenttbl" FromRole="teamtbl" ToRole="departmenttbl" />
+        </EntityType>
+        <Association Name="FK_teamtbl_projecttbl">
+          <End Type="HapinessSurveyModel.projecttbl" Role="projecttbl" Multiplicity="1" />
+          <End Type="HapinessSurveyModel.teamtbl" Role="teamtbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projecttbl">
+              <PropertyRef Name="pro_id" />
+            </Principal>
+            <Dependent Role="teamtbl">
+              <PropertyRef Name="pro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_teamtbl_roletbl">
+          <End Type="HapinessSurveyModel.roletbl" Role="roletbl" Multiplicity="1" />
+          <End Type="HapinessSurveyModel.teamtbl" Role="teamtbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roletbl">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="teamtbl">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_teamtbl_UserTbl">
+          <End Type="HapinessSurveyModel.UserTbl" Role="UserTbl" Multiplicity="1" />
+          <End Type="HapinessSurveyModel.teamtbl" Role="teamtbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTbl">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="teamtbl">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_teamtbl_departmenttbl">
+          <End Type="HapinessSurveyModel.departmenttbl" Role="departmenttbl" Multiplicity="0..1" />
+          <End Type="HapinessSurveyModel.teamtbl" Role="teamtbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departmenttbl">
+              <PropertyRef Name="dep_id" />
+            </Principal>
+            <Dependent Role="teamtbl">
+              <PropertyRef Name="dep_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -703,16 +787,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="teamtbls">
-            <EntityTypeMapping TypeName="HapinessSurveyModel.teamtbl">
-              <MappingFragment StoreEntitySet="teamtbl">
-                <ScalarProperty Name="role_id" ColumnName="role_id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="pro_id" ColumnName="pro_id" />
-                <ScalarProperty Name="team_id" ColumnName="team_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="departmenttbls">
             <EntityTypeMapping TypeName="HapinessSurveyModel.departmenttbl">
               <MappingFragment StoreEntitySet="departmenttbl">
@@ -747,12 +821,24 @@
           <EntitySetMapping Name="Submitsurveys">
             <EntityTypeMapping TypeName="HapinessSurveyModel.Submitsurvey">
               <MappingFragment StoreEntitySet="Submitsurvey">
+                <ScalarProperty Name="sq_id" ColumnName="sq_id" />
                 <ScalarProperty Name="role_id" ColumnName="role_id" />
                 <ScalarProperty Name="u_id" ColumnName="u_id" />
-                <ScalarProperty Name="s_id" ColumnName="s_id" />
+                <ScalarProperty Name="sur_id" ColumnName="sur_id" />
                 <ScalarProperty Name="comment" ColumnName="comment" />
                 <ScalarProperty Name="rating" ColumnName="rating" />
                 <ScalarProperty Name="ss_id" ColumnName="ss_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teamtbls">
+            <EntityTypeMapping TypeName="HapinessSurveyModel.teamtbl">
+              <MappingFragment StoreEntitySet="teamtbl">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+                <ScalarProperty Name="dep_id" ColumnName="dep_id" />
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

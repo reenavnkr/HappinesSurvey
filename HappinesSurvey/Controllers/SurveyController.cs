@@ -14,22 +14,26 @@ namespace HappinesSurvey.Controllers
         {
             using (HapinessSurveyEntities entities = new HapinessSurveyEntities())
             {
-                if(Session["RoleID"] != null)
+                if(Session["RoleID"] == null)
                 {
-                    int rid = Convert.ToInt32(Session["RoleID"]);
-                    if(rid ==4)
-                    {
-
-                    }
-                    if(rid == 5)
-                    {
-
-                    }
-                    if(rid == 6)
-                    {
-
-                    }
+                    RedirectToAction("Login", "Home");
+                  
                 }
+
+                int rid = Convert.ToInt32(Session["RoleID"]);
+                if (rid == 4)
+                {
+
+                }
+                if (rid == 5)
+                {
+
+                }
+                if (rid == 6)
+                {
+
+                }
+
             }
                 return View();
         }

@@ -12,13 +12,19 @@ namespace HappinesSurvey.Controllers
         // GET: GenerateSurvey
         public ActionResult Index()
         {
+
+            if (Session["RoleID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
             List<SelectListItem> items = new List<SelectListItem>();
 
             using (HapinessSurveyEntities entities = new HapinessSurveyEntities())
             {
                 //var depdata = new SelectList(entities.departmenttbls.ToList(),"dep_id","dep_name").to;
-               //List < SelectListItem > departmentlist = Getdepartment();
-               // ViewData["Department"] = departmentlist;
+                //List < SelectListItem > departmentlist = Getdepartment();
+                // ViewData["Department"] = departmentlist;
 
                 // var prodata = new SelectList(entities.projecttbls.ToList(), "pro_id", "pro_name");
                 List<SelectListItem> projectlist = Getproject();
@@ -28,7 +34,7 @@ namespace HappinesSurvey.Controllers
                 List<SelectListItem> rolelist = Getrole();
                 ViewData["Role"] = rolelist;
 
-                var qlist = from q in entities.questiontbls select new { q.q_id,q.question };
+                var qlist = from q in entities.questiontbls select new { q.q_id, q.question };
 
                 foreach (var v in qlist)
                 {
@@ -39,9 +45,11 @@ namespace HappinesSurvey.Controllers
 
                     });
                 }
-                
+
             }
-                return View("Questionlist", items);
+            return View("Questionlist", items);
+
+
         }
 
         [HttpPost]
@@ -107,6 +115,10 @@ namespace HappinesSurvey.Controllers
 
 
                         // ViewBag.Message += string.Format("{0}\\n", item.Text);
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Select Question";
                     }
                 }
 

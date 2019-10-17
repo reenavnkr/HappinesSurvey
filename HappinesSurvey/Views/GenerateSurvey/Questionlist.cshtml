@@ -12,35 +12,37 @@
     <title>Questionlist</title>
 </head>
 <body>
-    
-       
+
+
     <div class="box">
         @using (Html.BeginForm("Index", "GenerateSurvey", FormMethod.Post))
         {
-        <div class="box">
-            @*item of type 'IEnumerable<SelectListItem>
-                ' that has the key 'Department'.*@
+            <div class="box">
+                @*item of type 'IEnumerable<SelectListItem>
+                    ' that has the key 'Department'.*@
 
                 <div class="box-body">
                     <div class="box-success">
+                        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
                         <div class="form-group">
                             @*<div class="col-xs-4">
-                                Select Department:
-                                @Html.DropDownList("Departmentddl", (IEnumerable<SelectListItem>)ViewData["Department"], new { @class = "form-control" })
-                            </div>*@
+                                    Select Department:
+                                    @Html.DropDownList("Departmentddl", (IEnumerable<SelectListItem>)ViewData["Department"], new { @class = "form-control" })
+                                </div>*@
                             <div class="col-xs-4">
                                 Select Project :
                                 @Html.DropDownList("Projectddl", (IEnumerable<SelectListItem>)ViewData["Project"], new { @class = "form-control" })
-                                </div>
-                                <div class="col-xs-4">
-                                    Select Role:
-                                    @Html.DropDownList("Roleddl", (IEnumerable<SelectListItem>)ViewData["Role"], new { @class = "form-control" })
-                                    </div>
-                                </div>
+
                             </div>
+                            <div class="col-xs-4">
+                                Select Role:
+                                @Html.DropDownList("Roleddl", (IEnumerable<SelectListItem>)ViewData["Role"], new { @class = "form-control" })
+                            </div>
+                        </div>
                     </div>
-        </div>
-            <table class="table table-bordered">
+                </div>
+            </div>
+            <table id="tblquestion" class="table table-bordered">
                 @for (int i = 0; i < Model.Count(); i++)
                 {
                     <tr>
@@ -58,19 +60,55 @@
 
             </table>
 
-            <input type="submit" value="Submit" class="btn btn-success" />
+            <input type="submit" value="Submit" id="Submit" class="btn btn-success" />
 
             <br />
 
         }
-        @if (ViewBag.Message != null)
+
+        @*@if (ViewBag.Message == null)
         {
             <script type="text/javascript">
             window.onload = function () {
                 alert("@ViewBag.Message");
             };
             </script>
-        }
+        }*@
     </div>
 </body>
 </html>
+
+@section script{
+    <script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        $('#Submit').click(function () {
+            if ($("#Projectddl").val() > 0) {
+                return true;
+            }
+            else {
+                alert('Please select Project')
+                return false;
+            }
+
+              });
+        });
+            //var checked_checkboxes = $("#tblquestion input[type=checkbox]:checked");
+            //if (checked_checkboxes.length == 0) {
+            //    $(".error").show();
+            //    return false;
+            //}
+            //return true;
+               @*if (@ViewBag.Message == null)
+        {
+            window.onload = function () {
+                var valu = @ViewBag.Message;
+                alert(valu);
+            };*@   
+      
+
+
+    
+    //});
+
+</script>
+}

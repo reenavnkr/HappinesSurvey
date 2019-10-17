@@ -15,6 +15,7 @@ namespace HappinessSurvey.DAL
     public partial class teamtbl
     {
         public int team_id { get; set; }
+        public Nullable<int> dep_id { get; set; }
         public int pro_id { get; set; }
         public int user_id { get; set; }
         public int role_id { get; set; }
@@ -22,5 +23,6 @@ namespace HappinessSurvey.DAL
         public virtual projecttbl projecttbl { get; set; }
         public virtual roletbl roletbl { get; set; }
         public virtual UserTbl UserTbl { get; set; }
+        public virtual departmenttbl departmenttbl { get; set; }
     }
 }
